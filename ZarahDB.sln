@@ -1,0 +1,59 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZarahDB_Library", "ZarahDB_Library\ZarahDB_Library.csproj", "{7CD0CC44-9F11-4728-87C7-8CC98AF1A5AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZarahDB_WebAPI", "ZarahDB_WebAPI\ZarahDB_WebAPI.csproj", "{1474FD2F-D4B8-41AD-B75F-5D841BB87236}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZarahDB_Library.Tests", "ZarahDB_Library.Tests01\ZarahDB_Library.Tests.csproj", "{0204A976-A83C-4F1A-BBD3-BAF5F178BC9F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZarahDB_WebAPI.Tests", "ZarahDB_WebAPITests\ZarahDB_WebAPI.Tests.csproj", "{FE59F8BD-2D07-4F13-8DE0-CCCEA7C4E69B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7CD0CC44-9F11-4728-87C7-8CC98AF1A5AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CD0CC44-9F11-4728-87C7-8CC98AF1A5AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CD0CC44-9F11-4728-87C7-8CC98AF1A5AA}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{7CD0CC44-9F11-4728-87C7-8CC98AF1A5AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CD0CC44-9F11-4728-87C7-8CC98AF1A5AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1474FD2F-D4B8-41AD-B75F-5D841BB87236}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1474FD2F-D4B8-41AD-B75F-5D841BB87236}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1474FD2F-D4B8-41AD-B75F-5D841BB87236}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1474FD2F-D4B8-41AD-B75F-5D841BB87236}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0204A976-A83C-4F1A-BBD3-BAF5F178BC9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0204A976-A83C-4F1A-BBD3-BAF5F178BC9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0204A976-A83C-4F1A-BBD3-BAF5F178BC9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0204A976-A83C-4F1A-BBD3-BAF5F178BC9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE59F8BD-2D07-4F13-8DE0-CCCEA7C4E69B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE59F8BD-2D07-4F13-8DE0-CCCEA7C4E69B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE59F8BD-2D07-4F13-8DE0-CCCEA7C4E69B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE59F8BD-2D07-4F13-8DE0-CCCEA7C4E69B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 5
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://mikereedks.com:8080/tfs/benchmark%20solutions
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ZarahDB_Library\\ZarahDB_Library.csproj
+		SccProjectName1 = ZarahDB_Library
+		SccLocalPath1 = ZarahDB_Library
+		SccProjectUniqueName2 = ZarahDB_WebAPI\\ZarahDB_WebAPI.csproj
+		SccProjectName2 = ZarahDB_WebAPI
+		SccLocalPath2 = ZarahDB_WebAPI
+		SccProjectUniqueName3 = ZarahDB_Library.Tests01\\ZarahDB_Library.Tests.csproj
+		SccProjectName3 = ZarahDB_Library.Tests01
+		SccLocalPath3 = ZarahDB_Library.Tests01
+		SccProjectUniqueName4 = ZarahDB_WebAPITests\\ZarahDB_WebAPI.Tests.csproj
+		SccProjectName4 = ZarahDB_WebAPITests
+		SccLocalPath4 = ZarahDB_WebAPITests
+	EndGlobalSection
+EndGlobal
