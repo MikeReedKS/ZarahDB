@@ -40,6 +40,8 @@ Right click the "ZarahDB_HelloWorld" project in the Solution Explorer and click 
 Copy the ZarahDB_Library.dll file into the project folder. (You can right click it above to download the latest version)
 Add a reference to the ZarahDB_Library.dll library to your project.
 Click "Program.cs" in the Solution Explorer and replace the contents of that file with this:
+
+```C#
 using System;
 using ZarahDB_Library;
 
@@ -67,11 +69,13 @@ namespace ZarahDB_HelloWorld
         }
     }
 }
+```
 
 The Results
 
-Either using the API or the the code, the result is one row written to a table called "Test_Table" for the Key "Test Key". The row contains a single column called "Test Column" and has a value of "Test Value". The result will be a single JSON file in the "C:/zdb/Test_Table/t/e/s/t/_" folder called "test key.json". It's contents will look like the following JSON. (It won't be formatted, but it will contain the same structure and data)
+Either using the API or the the code, the result is one row written to a table called "Test_Table" for the Key "Test Key". The row contains a single column called "Test Column" and has a value of "Test Value". The result will be a single JSON file in the `C:/zdb/Test_Table/t/e/s/t/_` folder called `test key.json`. It's contents will look like the following JSON. (It won't be formatted, but it will contain the same structure and data)
 
+```JSON
 {
     "Keys": [
         {
@@ -87,6 +91,7 @@ Either using the API or the the code, the result is one row written to a table c
         }
     ]
 }
+```
 
 You can now read and write data to a ZarahDB database. It really is that easy. Now you need to decide if you will store values as Name/Value pairs or as documents. The examples above used a Name/Value pair. For each column, we assume there will be a single value.
 
@@ -94,6 +99,7 @@ Going the Document DB route
 
 We can also approch the value as a document, then it can contain any type of data. A common thing to store is a JSON blob. Using the Json.Net library from Newtonsoft we can simply serialize and deserialize any object type into a JSON Blob using the following code:
 
+```C#
 using System;
 using Newtonsoft.Json;
 using ZarahDB_Library;
@@ -138,8 +144,9 @@ namespace ConsoleApplication1
         }
     }
 }
+```
 
-Additionally we can use "complexObject = JsonConvert.DeserializeObject< ComplexObject>(value);" to get the value converted back from a document (JSON Blob in this case) to a complex object used in our program. Imagine how easy this makes storing your settings or other program data, no longer do you need to map to and from tables, think about what data goes where or many of the complexities of storing data in a typical SQL database.
+Additionally we can use `complexObject = JsonConvert.DeserializeObject< ComplexObject>(value);` to get the value converted back from a document (JSON Blob in this case) to a complex object used in our program. Imagine how easy this makes storing your settings or other program data, no longer do you need to map to and from tables, think about what data goes where or many of the complexities of storing data in a typical SQL database.
 
 Where would I use this?
 
