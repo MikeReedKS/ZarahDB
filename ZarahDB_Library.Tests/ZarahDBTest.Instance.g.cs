@@ -2,7 +2,7 @@
 using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ZarahDB_Library.Types
+namespace ZarahDB_Library.Tests
 {
     public partial class ZarahDBTest
     {
