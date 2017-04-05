@@ -17,15 +17,15 @@
 
 using System;
 using System.Collections.Generic;
-using Microsoft.Pex.Framework;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using ZarahDB_Library.Types;
 
-namespace ZarahDB_Library.Types
+namespace ZarahDB_Library.Tests
 {
     [TestClass]
     public partial class ZarahDBTest
     {
-        [PexMethod(MaxConditions = 1000)]
+
         public StatusMessageValue Put(
             Uri instance,
             string table,
@@ -37,73 +37,71 @@ namespace ZarahDB_Library.Types
             return ZarahDB.Put(instance, table, key, column, value);
         }
 
-        [PexMethod(MaxConditions = 1000)]
+
         public StatusList ListInstance(Uri instance, string table, string key)
         {
             return ZarahDB.ListInstance(null);
         }
 
-        [PexMethod(MaxConditions = 1000)]
+
         public StatusKeyColumnValues Get(Uri instance, string table, string key)
         {
             return ZarahDB.Get(instance, table, key);
         }
 
-        [PexMethod(MaxConditions = 1000)]
+
         public StatusMessageValue Get(Uri instance, string table, string key, string column)
         {
             return ZarahDB.Get(instance, table, key, column);
         }
 
-        [PexMethod(MaxConditions = 1000)]
+
         public StatusKeyColumnValues Get(Uri instance, string table, string key, List<string> columnList)
         {
             return ZarahDB.Get(instance, table, key, columnList);
         }
 
-        [PexMethod(MaxConditions = 1000)]
+
         public bool Exists(Uri instance)
         {
             return ZarahDB.Exists(instance);
         }
 
-        [PexMethod(MaxConditions = 1000)]
+
         public bool Exists(Uri instance, string table)
         {
             return ZarahDB.Exists(instance, table);
         }
 
-        [PexMethod(MaxConditions = 1000)]
+
         public bool Exists(Uri instance, string table, string key)
         {
             return ZarahDB.Exists(instance, table, key);
         }
 
-        [PexMethod(MaxConditions = 1000)]
+
         public StatusMessageValue Backup(Uri instance, int? timeoutSeconds)
         {
             return ZarahDB.Backup(instance, timeoutSeconds);
         }
 
-        [PexMethod(MaxConditions = 1000)]
+
         public StatusMessageValue DeleteInstance(Uri instance, int? timeoutSeconds)
         {
             return ZarahDB.DeleteInstance(instance, timeoutSeconds);
         }
 
-        [PexMethod(MaxConditions = 1000)]
+
         public StatusTransaction Transaction(Uri instance, string script)
         {
             return ZarahDB.Script(instance, script);
         }
 
-        [PexMethod(MaxConditions = 1000)]
         public StatusMessageValue SetMaxDepth(Uri instance, string table, int maxDepth)
         {
             return ZarahDB.SetMaxDepth(instance, table, maxDepth);
         }
 
-        [PexMethod(MaxConditions = 1000)]
         public StatusMessageValue GetMaxDepth(Uri instance, string table)
         {
             return ZarahDB.GetMaxDepth(instance, table);
@@ -129,7 +127,7 @@ namespace ZarahDB_Library.Types
         //        instance, table, timeoutSeconds);
         //}
 
-        [PexMethod(MaxConditions = 1000)]
+
         public bool CsvInsert(Uri csvFolder, List<string> columns, string keyColumn, string fieldSeparator,
             string encloser, string lineTerminator, string commentLineStarter, Uri instance, string table)
         {
