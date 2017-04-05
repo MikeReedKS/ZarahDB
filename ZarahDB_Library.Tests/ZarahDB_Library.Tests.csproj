@@ -77,29 +77,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="CsvData\FacebookUsers 100001545003000 to 100001545003999.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="CsvData\FacebookUsers 1000015491102000 to 1000015491102999.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="CsvData\FacebookUsers 100001557002000 to 100001557002999.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="CsvData\FacebookUsers 100001774421000 to 100001774421999.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="CsvData\FacebookUsers 100001801168000 to 100001801168999.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="CsvData\FacebookUsers 1000018811026000 to 1000018811026999.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="CsvData\FacebookUsers 100001896611000 to 100001896611999.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <Choose>
