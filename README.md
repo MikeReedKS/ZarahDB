@@ -94,7 +94,7 @@ The ZarahDB_Library.dll file is all you need to add a scattered database to your
 
 1. In Visual Studio, create a new project called "ZarahDB_HelloWorld".
 2. Add the ZarahDB_Library NuGet package from NuGet.org to your project.
-3.Click "Program.cs" in the Solution Explorer and replace the contents of that file with this:
+3. Click "Program.cs" in the Solution Explorer and replace the contents of that file with this:
 
 ```C#
 using System;
@@ -169,36 +169,35 @@ namespace ConsoleApplication1
 
         static void Main(string[] args)
         {
+            //Define where the data is stored
             var instance = new Uri(@"C:\ZDB");
             var table = "Test Table";
             var key = "Test Key";
             var column = "Test Column";
 
             //Create a value that is a document (JSON in this case)
-            var complexObject = new ComplexObject
+            var complexObject1 = new ComplexObject
             {
                 FirstName = "Mike",
                 LastName = "Reed",
                 DateOfBirth = DateTime.Parse("06/24/1962")
             };
-            var value = JsonConvert.SerializeObject(complexObject);
+            var value = JsonConvert.SerializeObject(complexObject1);
 
-            //Store a value in the database
+            //Store a value (JSON Blob serialized from a POCO) in the database
             var putResult = ZarahDB.Put(instance, table, key, column, value);
-            Console.WriteLine(putResult.Status);
 
             //Read a value from the database
             var getResult = ZarahDB.Get(instance, table, key, column);
-            Console.WriteLine(getResult.Value);
-
-            //Pause, awaiting a key press
-            Console.ReadKey();
+            
+            //Place the value in a complex object
+            var complexObject2 = JsonConvert.DeserializeObject<ComplexObject>(getResult.value);
         }
     }
 }
 ```
 
-Additionally we can use `complexObject = JsonConvert.DeserializeObject< ComplexObject>(value);` to get the value converted back from a document (JSON Blob in this case) to a complex object used in our program. Imagine how easy this makes storing your settings or other program data, no longer do you need to map to and from tables, think about what data goes where or many of the complexities of storing data in a typical SQL database.
+Imagine how easy this makes storing your settings or other program data, no longer do you need to map to and from tables, think about what data goes where or many of the complexities of storing data in a typical SQL database.
 
 ## Where would I use this?
 
