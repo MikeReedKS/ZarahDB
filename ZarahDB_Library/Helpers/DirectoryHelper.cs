@@ -21,12 +21,12 @@ using System.Threading;
 namespace ZarahDB_Library.Helpers
 {
     /// <summary>
-    /// Class DirectoryHelper.
+    ///     Class DirectoryHelper.
     /// </summary>
     internal static class DirectoryHelper
     {
         /// <summary>
-        /// Creates the name of the legal directory.
+        ///     Creates the name of the legal directory.
         /// </summary>
         /// <param name="table">The table.</param>
         /// <param name="key">The key.</param>
@@ -54,7 +54,7 @@ namespace ZarahDB_Library.Helpers
         }
 
         /// <summary>
-        /// Assures the folder exists. If it does not, it creates it.
+        ///     Assures the folder exists. If it does not, it creates it.
         /// </summary>
         /// <param name="directoryPath">The directory path.</param>
         /// <exception cref="System.ApplicationException"></exception>
@@ -72,7 +72,7 @@ namespace ZarahDB_Library.Helpers
         }
 
         /// <summary>
-        /// Tests if the Folder exists.
+        ///     Tests if the Folder exists.
         /// </summary>
         /// <param name="directoryPath">The directory path.</param>
         /// <returns>System.Boolean</returns>
@@ -95,7 +95,7 @@ namespace ZarahDB_Library.Helpers
         }
 
         /// <summary>
-        /// Moves the directory.
+        ///     Moves the directory.
         /// </summary>
         /// <param name="source">The source.</param>
         /// <param name="target">The target.</param>
@@ -143,14 +143,14 @@ namespace ZarahDB_Library.Helpers
         }
 
         /// <summary>
-        /// Deletes the directory.
+        ///     Deletes the directory.
         /// </summary>
         /// <param name="path">The path.</param>
         internal static void DeleteDirectory(string path)
         {
             if (!DirectoryExists(path)) return;
 
-            var directory = new DirectoryInfo(path) { Attributes = FileAttributes.Normal };
+            var directory = new DirectoryInfo(path) {Attributes = FileAttributes.Normal};
 
             foreach (var info in directory.GetFileSystemInfos("*", SearchOption.AllDirectories))
             {
@@ -161,7 +161,7 @@ namespace ZarahDB_Library.Helpers
         }
 
         /// <summary>
-        /// Childs the folders.
+        ///     Childs the folders.
         /// </summary>
         /// <param name="path">The path.</param>
         /// <returns>List&lt;System.String&gt;.</returns>
@@ -169,7 +169,7 @@ namespace ZarahDB_Library.Helpers
         {
             var result = new List<string>();
             var directory = new DirectoryInfo(path);
-            DirectoryInfo[] directories = directory.GetDirectories();
+            var directories = directory.GetDirectories();
 
             foreach (var folder in directories)
                 result.Add(folder.Name);
@@ -178,7 +178,7 @@ namespace ZarahDB_Library.Helpers
         }
 
         /// <summary>
-        /// Childs the instances.
+        ///     Childs the instances.
         /// </summary>
         /// <param name="path">The path.</param>
         /// <returns>List&lt;System.String&gt;.</returns>
@@ -186,11 +186,11 @@ namespace ZarahDB_Library.Helpers
         {
             var result = new List<string>();
             var directory = new DirectoryInfo(path);
-            DirectoryInfo[] directories = directory.GetDirectories();
+            var directories = directory.GetDirectories();
 
             foreach (var folder in directories)
             {
-                var maxDepthFilename = Path.Combine(folder.FullName, "[default]" ,"Max.Depth");
+                var maxDepthFilename = Path.Combine(folder.FullName, "[default]", "Max.Depth");
                 if (File.Exists(maxDepthFilename))
                 {
                     result.Add(folder.Name);

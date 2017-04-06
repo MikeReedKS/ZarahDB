@@ -35,19 +35,19 @@ namespace ZarahDB_Library.Models
     //limitations under the License.
 
     /// <summary>
-    /// Class ZarahDBModel.
+    ///     Class ZarahDBModel.
     /// </summary>
     internal static class ZarahDBModel
     {
         #region Default Instance
 
         /// <summary>
-        /// The instance
+        ///     The instance
         /// </summary>
         internal static Uri Instance = GetDefaultInstance();
 
         /// <summary>
-        /// Gets the default instance.
+        ///     Gets the default instance.
         /// </summary>
         /// <returns>Uri.</returns>
         private static Uri GetDefaultInstance()
@@ -55,7 +55,11 @@ namespace ZarahDB_Library.Models
             Uri instance;
             try
             {
-                instance = new Uri(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase) ?? Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "zdb"));
+                instance =
+                    new Uri(
+                        Path.Combine(
+                            Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase) ??
+                            Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "zdb"));
             }
             catch (Exception)
             {
@@ -65,7 +69,7 @@ namespace ZarahDB_Library.Models
         }
 
         /// <summary>
-        /// Gets the instance.
+        ///     Gets the instance.
         /// </summary>
         /// <returns>Uri.</returns>
         internal static Uri GetInstance()
@@ -74,7 +78,7 @@ namespace ZarahDB_Library.Models
         }
 
         /// <summary>
-        /// Puts the instance.
+        ///     Puts the instance.
         /// </summary>
         internal static void PutInstance()
         {
@@ -82,7 +86,7 @@ namespace ZarahDB_Library.Models
         }
 
         /// <summary>
-        /// Puts the instance.
+        ///     Puts the instance.
         /// </summary>
         /// <param name="instanceName">Name of the instance.</param>
         internal static void PutInstance(string instanceName)
@@ -91,7 +95,7 @@ namespace ZarahDB_Library.Models
         }
 
         /// <summary>
-        /// Puts the instance.
+        ///     Puts the instance.
         /// </summary>
         /// <param name="instanceName">Name of the instance.</param>
         /// <param name="rootFolder">The root folder.</param>
@@ -107,19 +111,28 @@ namespace ZarahDB_Library.Models
                 case InstanceLocation.CommonApplicationData:
                     //AppData for all users
                     var instancePathCommonApplicationData = Environment.SpecialFolder.CommonApplicationData;
-                    Instance = new Uri(Path.Combine(Environment.GetFolderPath(instancePathCommonApplicationData), instanceName));
+                    Instance =
+                        new Uri(Path.Combine(Environment.GetFolderPath(instancePathCommonApplicationData), instanceName));
                     break;
                 case InstanceLocation.ApplicationData:
                     //AppData for the current user
-                    Instance = new Uri(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), instanceName));
+                    Instance =
+                        new Uri(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                            instanceName));
                     break;
                 case InstanceLocation.DesktopDirectory:
                     //Desktop of current user
-                    Instance = new Uri(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), instanceName));
+                    Instance =
+                        new Uri(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory),
+                            instanceName));
                     break;
                 case InstanceLocation.Location:
                     //Location of assembly as specified if dynamic, falls back to ApplicationData if null
-                    Instance = new Uri(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), instanceName));
+                    Instance =
+                        new Uri(
+                            Path.Combine(
+                                Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ??
+                                Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), instanceName));
                     break;
                 case InstanceLocation.BaseDirectory:
                     //Base directory that the assembly resolver uses to probe for assemblies
@@ -127,16 +140,24 @@ namespace ZarahDB_Library.Models
                     break;
                 case InstanceLocation.Codebase:
                     //Location of assembly
-                    Instance = new Uri(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase) ?? Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), instanceName));
+                    Instance =
+                        new Uri(
+                            Path.Combine(
+                                Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase) ??
+                                Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), instanceName));
                     break;
                 default: //Default is Codebase
-                    Instance = new Uri(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase) ?? Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), instanceName));
+                    Instance =
+                        new Uri(
+                            Path.Combine(
+                                Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase) ??
+                                Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), instanceName));
                     break;
             }
         }
 
         /// <summary>
-        /// Puts the instance.
+        ///     Puts the instance.
         /// </summary>
         /// <param name="instance">The instance.</param>
         internal static void PutInstance(Uri instance)
@@ -149,12 +170,12 @@ namespace ZarahDB_Library.Models
         #region Default Table
 
         /// <summary>
-        /// The table
+        ///     The table
         /// </summary>
         internal static string Table;
 
         /// <summary>
-        /// Gets the table.
+        ///     Gets the table.
         /// </summary>
         /// <returns>System.String.</returns>
         internal static string GetTable()
@@ -163,7 +184,7 @@ namespace ZarahDB_Library.Models
         }
 
         /// <summary>
-        /// Puts the table.
+        ///     Puts the table.
         /// </summary>
         internal static void PutTable()
         {
@@ -171,7 +192,7 @@ namespace ZarahDB_Library.Models
         }
 
         /// <summary>
-        /// Puts the table.
+        ///     Puts the table.
         /// </summary>
         /// <param name="table">The table.</param>
         internal static void PutTable(string table)
@@ -184,12 +205,12 @@ namespace ZarahDB_Library.Models
         #region Default TimeoutSeconds
 
         /// <summary>
-        /// The timeout seconds
+        ///     The timeout seconds
         /// </summary>
         internal static int TimeoutSeconds = 30;
 
         /// <summary>
-        /// Gets the timeout seconds.
+        ///     Gets the timeout seconds.
         /// </summary>
         /// <returns>System.Int32.</returns>
         internal static int GetTimeoutSeconds()
@@ -198,7 +219,7 @@ namespace ZarahDB_Library.Models
         }
 
         /// <summary>
-        /// Puts the timeout seconds.
+        ///     Puts the timeout seconds.
         /// </summary>
         internal static void PutTimeoutSeconds()
         {
@@ -206,7 +227,7 @@ namespace ZarahDB_Library.Models
         }
 
         /// <summary>
-        /// Puts the timeout seconds.
+        ///     Puts the timeout seconds.
         /// </summary>
         /// <param name="timeoutSeconds">The timeout seconds.</param>
         internal static void PutTimeoutSeconds(int timeoutSeconds)

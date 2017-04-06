@@ -26,27 +26,35 @@ using ZarahDB_WebAPI.Helpers;
 namespace ZarahDB_WebAPI.Controllers
 {
     /// <summary>
-    /// Class TableController.
+    ///     Class TableController.
     /// </summary>
     /// <seealso cref="System.Web.Http.ApiController" />
     public class TableController : ApiController
     {
         /// <summary>
-        /// Import CSV data directly (data is passed in the call, no file required).
+        ///     Import CSV data directly (data is passed in the call, no file required).
         /// </summary>
         /// <param name="csvData">The CSV data.</param>
         /// <param name="timeoutSeconds">The timeout seconds. (optional) Defaults to 30 seconds.</param>
         /// <returns>StatusTransaction</returns>
         /// <response code="200">OK</response>
         /// <response code="401">Authorization has been denied for this request.</response>
-        /// <response code="403">Forbidden. Instance disallowed by configuration. (HTTP Response Code is 200, Response Body Status is 403)</response>
+        /// <response code="403">
+        ///     Forbidden. Instance disallowed by configuration. (HTTP Response Code is 200, Response Body Status
+        ///     is 403)
+        /// </response>
         /// <response code="520">Exception. The message will contain the exception message.</response>
         /// <response code="597">Network timeout error (Persistent Lock for more than {timeoutSeconds} seconds.)</response>
-        /// <remarks>Imports CSV data directly. This allows the client to post CSV data directly without the need to upload a CSV file.
-        /// The import bypasses the transaction system to allow the fastest possible addition of new data, but may result in concurrency challenges.
-        /// It is advised that the instance be locked prior to issuing this request if there is a chance that other clients may perform
-        /// other operations during the import. Any existing key/column/values may be overwritten with the CSV data. Existing data that
-        /// is not overwritten with new data is untouched.</remarks>
+        /// <remarks>
+        ///     Imports CSV data directly. This allows the client to post CSV data directly without the need to upload a CSV file.
+        ///     The import bypasses the transaction system to allow the fastest possible addition of new data, but may result in
+        ///     concurrency challenges.
+        ///     It is advised that the instance be locked prior to issuing this request if there is a chance that other clients may
+        ///     perform
+        ///     other operations during the import. Any existing key/column/values may be overwritten with the CSV data. Existing
+        ///     data that
+        ///     is not overwritten with new data is untouched.
+        /// </remarks>
         [AcceptVerbs("PUT")]
         [Route("Table/CSV")]
         public StatusMessageValue CsvPut(
@@ -56,7 +64,8 @@ namespace ZarahDB_WebAPI.Controllers
             var statusMessageValue = new StatusMessageValue();
 
             //Check security to be sure this method is allowed to execute
-            if (!SecurityHelper.MethodAllowed(MethodBase.GetCurrentMethod().Name, ref statusMessageValue)) return statusMessageValue;
+            if (!SecurityHelper.MethodAllowed(MethodBase.GetCurrentMethod().Name, ref statusMessageValue))
+                return statusMessageValue;
             if (!SecurityHelper.InstanceAllowed(csvData.Instance, ref statusMessageValue)) return statusMessageValue;
 
             //Update instance to physical path based on InstancesRootFolder
@@ -65,12 +74,14 @@ namespace ZarahDB_WebAPI.Controllers
             //Call the method
             try
             {
-                statusMessageValue = ZarahDB.CsvPut(csvData.CSVData, csvData.Columns, csvData.KeyColumn, csvData.FieldSeparator, csvData.Encloser, csvData.LineTerminator,
-                csvData.CommentLineStarter, new Uri(csvData.Instance), csvData.Table, timeoutSeconds);
+                statusMessageValue = ZarahDB.CsvPut(csvData.CSVData, csvData.Columns, csvData.KeyColumn,
+                    csvData.FieldSeparator, csvData.Encloser, csvData.LineTerminator,
+                    csvData.CommentLineStarter, new Uri(csvData.Instance), csvData.Table, timeoutSeconds);
             }
             catch (Exception ex)
             {
-                statusMessageValue = StatusHelper.SetStatusMessageValue(ZarahDB_Library.Enums.StatusCode.Exception, ex.Message);
+                statusMessageValue = StatusHelper.SetStatusMessageValue(ZarahDB_Library.Enums.StatusCode.Exception,
+                    ex.Message);
             }
 
             //Adjust the response to return just the backup name and not the path
@@ -80,7 +91,7 @@ namespace ZarahDB_WebAPI.Controllers
         }
 
         /// <summary>
-        /// Import a single CSV file directly.
+        ///     Import a single CSV file directly.
         /// </summary>
         /// <param name="csvFile">The CSV file.</param>
         /// <param name="columns">The columns.</param>
@@ -93,11 +104,16 @@ namespace ZarahDB_WebAPI.Controllers
         /// <param name="table">The table.</param>
         /// <param name="timeoutSeconds">The timeout seconds.</param>
         /// <returns>StatusTransaction</returns>
-        /// <remarks>Import a single CSV file.
-        /// The import bypasses the transaction system to allow the fastest possible addition of new data, but may result in concurrency challenges.
-        /// It is advised that the instance be locked prior to issuing this request if there is a chance that other clients may perform
-        /// other operations during the import. Any existing key/column/values may be overwritten with the CSV data. Existing data that
-        /// is not overwritten with new data is untouched.</remarks>
+        /// <remarks>
+        ///     Import a single CSV file.
+        ///     The import bypasses the transaction system to allow the fastest possible addition of new data, but may result in
+        ///     concurrency challenges.
+        ///     It is advised that the instance be locked prior to issuing this request if there is a chance that other clients may
+        ///     perform
+        ///     other operations during the import. Any existing key/column/values may be overwritten with the CSV data. Existing
+        ///     data that
+        ///     is not overwritten with new data is untouched.
+        /// </remarks>
         [AcceptVerbs("PUT")]
         [Route("Table/CSV/File")]
         public StatusMessageValue CsvFilePut(
@@ -115,7 +131,8 @@ namespace ZarahDB_WebAPI.Controllers
             var statusMessageValue = new StatusMessageValue();
 
             //Check security to be sure this method is allowed to execute
-            if (!SecurityHelper.MethodAllowed(MethodBase.GetCurrentMethod().Name, ref statusMessageValue)) return statusMessageValue;
+            if (!SecurityHelper.MethodAllowed(MethodBase.GetCurrentMethod().Name, ref statusMessageValue))
+                return statusMessageValue;
             if (!SecurityHelper.InstanceAllowed(instance, ref statusMessageValue)) return statusMessageValue;
 
             //Update instance to physical path based on InstancesRootFolder
@@ -134,12 +151,14 @@ namespace ZarahDB_WebAPI.Controllers
             //Call the method
             try
             {
-                statusMessageValue = ZarahDB.CsvFilePut(localPath == null ? null : new Uri(localPath), columns, keyColumn, fieldSeparator, encloser, lineTerminator,
-                commentLineStarter, localPath == null ? null : new Uri(localPath), table, timeoutSeconds);
+                statusMessageValue = ZarahDB.CsvFilePut(localPath == null ? null : new Uri(localPath), columns,
+                    keyColumn, fieldSeparator, encloser, lineTerminator,
+                    commentLineStarter, localPath == null ? null : new Uri(localPath), table, timeoutSeconds);
             }
             catch (Exception ex)
             {
-                statusMessageValue = StatusHelper.SetStatusMessageValue(ZarahDB_Library.Enums.StatusCode.Exception, ex.Message);
+                statusMessageValue = StatusHelper.SetStatusMessageValue(ZarahDB_Library.Enums.StatusCode.Exception,
+                    ex.Message);
             }
 
             //Adjust the response to return just the backup name and not the path
@@ -149,7 +168,7 @@ namespace ZarahDB_WebAPI.Controllers
         }
 
         /// <summary>
-        /// Import all the CSV files in a single folder.
+        ///     Import all the CSV files in a single folder.
         /// </summary>
         /// <param name="csvFolder">The CSV folder.</param>
         /// <param name="columns">The columns.</param>
@@ -200,19 +219,21 @@ namespace ZarahDB_WebAPI.Controllers
             StatusMessageValue statusMessageValue;
             try
             {
-                statusMessageValue = ZarahDB.CsvFolderPut(csvLocalPath == null ? null : new Uri(csvLocalPath), columns, keyColumn, fieldSeparator, encloser, lineTerminator,
-                commentLineStarter, localPath == null ? null : new Uri(localPath), table, timeoutSeconds);
+                statusMessageValue = ZarahDB.CsvFolderPut(csvLocalPath == null ? null : new Uri(csvLocalPath), columns,
+                    keyColumn, fieldSeparator, encloser, lineTerminator,
+                    commentLineStarter, localPath == null ? null : new Uri(localPath), table, timeoutSeconds);
             }
             catch (Exception ex)
             {
-                statusMessageValue = StatusHelper.SetStatusMessageValue(ZarahDB_Library.Enums.StatusCode.Exception, ex.Message);
+                statusMessageValue = StatusHelper.SetStatusMessageValue(ZarahDB_Library.Enums.StatusCode.Exception,
+                    ex.Message);
             }
 
             return statusMessageValue;
         }
 
         /// <summary>
-        /// Deletes the specified table.
+        ///     Deletes the specified table.
         /// </summary>
         /// <param name="instance">The instance.</param>
         /// <param name="table">The table.</param>
@@ -249,9 +270,8 @@ namespace ZarahDB_WebAPI.Controllers
             return result;
         }
 
-
         /// <summary>
-        /// Lists the tables in the specified instance.
+        ///     Lists the tables in the specified instance.
         /// </summary>
         /// <param name="instance">The instance.</param>
         /// <returns>StatusList.</returns>
@@ -283,7 +303,7 @@ namespace ZarahDB_WebAPI.Controllers
         }
 
         /// <summary>
-        /// Test for the existence of a single table.
+        ///     Test for the existence of a single table.
         /// </summary>
         /// <param name="instance">The instance.</param>
         /// <param name="table">The table.</param>
@@ -297,7 +317,8 @@ namespace ZarahDB_WebAPI.Controllers
             var statusMessageValue = new StatusMessageValue();
 
             //Check security to be sure this method is allowed to execute
-            if (!SecurityHelper.MethodAllowed(MethodBase.GetCurrentMethod().Name, ref statusMessageValue)) return statusMessageValue;
+            if (!SecurityHelper.MethodAllowed(MethodBase.GetCurrentMethod().Name, ref statusMessageValue))
+                return statusMessageValue;
             if (!SecurityHelper.InstanceAllowed(instance, ref statusMessageValue)) return statusMessageValue;
 
             //Update instance to physical path based on InstancesRootFolder
@@ -319,7 +340,7 @@ namespace ZarahDB_WebAPI.Controllers
         }
 
         /// <summary>
-        /// Locks a table.
+        ///     Locks a table.
         /// </summary>
         /// <param name="instance">The instance.</param>
         /// <param name="table">The table.</param>
@@ -343,7 +364,7 @@ namespace ZarahDB_WebAPI.Controllers
         }
 
         /// <summary>
-        /// Unlocks a table.
+        ///     Unlocks a table.
         /// </summary>
         /// <param name="instance">The instance.</param>
         /// <param name="table">The table.</param>

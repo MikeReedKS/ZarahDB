@@ -14,20 +14,19 @@
 
 using System.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ZarahDB_Library.Types;
 
 namespace ZarahDB_WebAPI.Controllers.Tests
 {
     /// <summary>
-    /// Class InstanceControllerTests.
+    ///     Class InstanceControllerTests.
     /// </summary>
-    [TestClass()]
+    [TestClass]
     public class InstanceControllerTests
     {
         /// <summary>
-        /// Bases the tests instance.
+        ///     Bases the tests instance.
         /// </summary>
-        [TestMethod()]
+        [TestMethod]
         public void GeneralTest_Instance()
         {
             Debug.WriteLine("Creating an instance of the Instance API controller.");
@@ -37,7 +36,7 @@ namespace ZarahDB_WebAPI.Controllers.Tests
             Debug.WriteLine($"Setting test instance to: {testInstanceName}.");
 
             Debug.WriteLine("Getting list of allowed instances which already exist.");
-            StatusList resultGetInstance = instanceController.GetInstance();
+            var resultGetInstance = instanceController.GetInstance();
             Assert.AreEqual(resultGetInstance.Status, "200", "Failed to GetInstance.");
             Debug.WriteLine("Instances:");
             foreach (var instance in resultGetInstance.List)
@@ -46,7 +45,7 @@ namespace ZarahDB_WebAPI.Controllers.Tests
             }
 
             Debug.WriteLine("See if the test instance exists, if so, delete it.");
-            StatusMessageValue resultExistsInstance = instanceController.ExistsInstance(testInstanceName);
+            var resultExistsInstance = instanceController.ExistsInstance(testInstanceName);
             Assert.AreEqual(resultExistsInstance.Status, "200", "Failed to GetInstance.");
             if (resultExistsInstance.Value == "True")
             {

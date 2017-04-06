@@ -36,12 +36,12 @@ using ZarahDB_Library.Types;
 namespace ZarahDB_WebAPI.Controllers
 {
     /// <summary>
-    /// Class ScriptController.
+    ///     Class ScriptController.
     /// </summary>
     public class ScriptController : ApiController
     {
         /// <summary>
-        /// Executes a script of commands directly.
+        ///     Executes a script of commands directly.
         /// </summary>
         /// <param name="instance">The instance.</param>
         /// <param name="script">The script.</param>
@@ -77,7 +77,7 @@ namespace ZarahDB_WebAPI.Controllers
         }
 
         /// <summary>
-        /// Puts the script into the instance so that it can be executed.
+        ///     Puts the script into the instance so that it can be executed.
         /// </summary>
         /// <param name="instance">The instance.</param>
         /// <param name="scriptName">Name of the script.</param>
@@ -115,7 +115,7 @@ namespace ZarahDB_WebAPI.Controllers
         }
 
         /// <summary>
-        /// Gets a script from the instance.
+        ///     Gets a script from the instance.
         /// </summary>
         /// <param name="instance">The instance.</param>
         /// <param name="scriptName">The script.</param>
@@ -151,7 +151,7 @@ namespace ZarahDB_WebAPI.Controllers
         }
 
         /// <summary>
-        /// Execute a script from the instance.
+        ///     Execute a script from the instance.
         /// </summary>
         /// <param name="instance">The instance.</param>
         /// <param name="scriptName">The script.</param>
@@ -184,7 +184,8 @@ namespace ZarahDB_WebAPI.Controllers
             var newStatusTransaction = new StatusTransaction();
             try
             {
-                newStatusTransaction = ZarahDB.ExecuteScript(localPath == null ? null : new Uri(localPath), scriptName, variablesDictionary);
+                newStatusTransaction = ZarahDB.ExecuteScript(localPath == null ? null : new Uri(localPath), scriptName,
+                    variablesDictionary);
             }
             catch (Exception ex)
             {
