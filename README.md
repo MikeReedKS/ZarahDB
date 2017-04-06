@@ -1,19 +1,25 @@
 # ZarahDB
-Open Source NoSQL Database for Unique Key Tables
+A New Open Source NoSQL Database for Unique Key Tables
 
-The basic concept of a scattered database is that all data is stored as JSON files scattered across the file system in a logical hierarchy. One of the oldest and most tuned parts of the operating system is the file system. If you ask for a single file with a full path, you can open and read a file almost instantly, and as disks get faster and larger, the file system makes a lot of sense as an index to information. ZarahDB makes storing data in JSON files simple, structured, reliable and robust.
+The basic concept of a scattered database is that all data is stored as JSON files scattered across the file system in a logical hierarchy. One of the oldest and most tuned parts of the operating system is the file system. If you ask for a single file with a full path, you can open and read a file almost instantly, and as disks get faster and larger, the file system makes a lot of sense as an index to information. It made sense on floppies, on today's disks, it is amazing. ZarahDB makes storing data in JSON files simple, structured, reliable and robust.
 
 ## Installation
 
-There is no installation. Seriously, it's a database server, without a database server! The Operating System is the database. If you can boot a windows server, laptop, device of any kind, and there is a disk of some sort, then you have all you need to have a ZarahDB. If you can share the disk, as a shared folder, NAS, SAN or any other way to share diskspace, then you can add as many nodes and the drives can handle. Need to scale bigger? Break the scattering across physical disks to offer even more speed and handle even more nodes.
+There is no installation. Seriously, it's a database server, without a database server! The Operating System IS the database. If you can boot a windows server, a desktop, or even a laptop, really any Windows device of any kind will do, if there is a disk of some sort, it will do. 
+
+If you can share the disk, as a shared folder, NAS, SAN or any other way to share disk space, then you can add as many nodes as the drives can handle. With today's fastest SANs that's a LOT of nodes! Need to scale even bigger? Break the scattering across physical disks to offer even more speed and handle even more nodes. 
 
 ## Usage
 
-If you are thinking infrastructure, start with any PC, even old boxes perform pretty well for most uses. If you are thinking software, you have two approches. The first is a 50K DLL that you add easily to any project as a NuGet package. You then have a rich API at your desposal. The second is to use the WebAPI/Swagger based interface for an SOA architecture. The Web API uses the 50K DLL, so in the end, you can use the DLL direct, or you can use the Web API wrapper, it all depends on what fits your application best.
+If you are thinking infrastructure, start with any PC, even old PCs perform pretty well for most uses. If you are thinking architecture, you have two approaches. 
+
+The first is a 50K DLL that you add easily to any project as a NuGet package. You then have a rich API at your disposal. 
+
+The second is to use the WebAPI/Swagger based interface for an SOA architecture. The Web API uses the 50K DLL, so in the end, you can use the DLL directly, or you can use the Web API wrapper, it all depends on what fits your application best.
 
 ## Contributing
 
-1. Fork it! Please, I encourage you. I promise to be honest and open, merging any changes that make sense, from any contributor.
+1. Fork it! Please, I encourage you. I promise, to be honest, and open, merging any changes that make sense, from any contributor.
 2. Create your feature branch: `git checkout -b my-new-feature`
 3. Commit your changes: `git commit -am 'Add some feature'`
 4. Push to the branch: `git push origin my-new-feature`
@@ -21,14 +27,14 @@ If you are thinking infrastructure, start with any PC, even old boxes perform pr
 
 ## History
 
-Starting in the late '80s I worked on a series of projects and used a Scattered Database to add performance to systems I designed. I got a lot of pushback once SQL Server was released, but there were times when the Scattered Database could easily out perform SQL Server. With the growth in popularity of NoSQL databases, I decided it was time to set the scattered database free. I hope you like it!
+Starting in the late '80s I worked on a series of projects and used a Scattered Database to add performance to several of the systems I designed. I got a lot of pushback once SQL Server was released, but there were times when the Scattered Database could easily outperform SQL Server. With the growth in popularity of NoSQL databases, I decided it was time to set the scattered database free. I hope you like it!
 
 Oh, and Zarah is Hebrew for Scattered... that's where the name comes from.
 
 ## Credits
 
-By Mike Reed of Benchmark Solutions LLC, a Kansas Corporation. 
-Make a real difference to the project, and I may just add your name here! Seriously!
+By Mike Reed of Benchmark Solutions LLC, a Kansas Corporation.
+`Make a real, positive and consconstructive difference to the project, and I may just add your name here! Seriously!`
 
 ## License
 
@@ -86,11 +92,9 @@ The Swagger UI makes using the web interface very straight forward:
 
 The ZarahDB_Library.dll file is all you need to add a scattered database to your C# project. Add this DLL and add a reference to it in your project. You will also need the Newtonsoft.Json NuGet package. You can get the ZarahDB_Library from https://www.nuget.org/packages/ZarahDB.Library or using the packet manager in Visual Studio.
 
-In Visual Studio, create a new project called "ZarahDB_HelloWorld".
-Right click the "ZarahDB_HelloWorld" project in the Solution Explorer and click "Open Folder in File Explorer". This will open a new file explorer window showing the files in your new project.
-Copy the ZarahDB_Library.dll file into the project folder. (You can right click it above to download the latest version)
-Add a reference to the ZarahDB_Library.dll library to your project.
-Click "Program.cs" in the Solution Explorer and replace the contents of that file with this:
+1. In Visual Studio, create a new project called "ZarahDB_HelloWorld".
+2. Add the ZarahDB_Library NuGet package from NuGet.org to your project.
+3.Click "Program.cs" in the Solution Explorer and replace the contents of that file with this:
 
 ```C#
 using System;
@@ -102,6 +106,7 @@ namespace ZarahDB_HelloWorld
     {
         static void Main(string[] args)
         {
+            //Define where the data is stored
             var instance = new Uri(@"C:\ZDB");
             var table = "Test Table";
             var key = "Test Key";
