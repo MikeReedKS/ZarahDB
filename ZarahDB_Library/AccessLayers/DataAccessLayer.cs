@@ -52,7 +52,6 @@ namespace ZarahDB_Library.AccessLayers
         {
             var requestedTicks = StringHelper.NowTicks();
 
-            var startTime = DateTime.Now;
             var startTicks = StringHelper.NowTicks();
 
             var result = FileAccessLayer.CreateInstance(instance);
@@ -185,7 +184,7 @@ namespace ZarahDB_Library.AccessLayers
             var startTicks = StringHelper.NowTicks();
 
             FileAccessLayer.LockInstance(instance);
-            StatusMessageValue result = null;
+            StatusMessageValue result;
             try
             {
                 result = FileAccessLayer.Restore(instance, backup);
@@ -262,7 +261,8 @@ namespace ZarahDB_Library.AccessLayers
 
             var startTicks = StringHelper.NowTicks();
 
-            var result = FileAccessLayer.CsvFilePut(csvFile, columns, keyColumn, fieldSeparator, encloser, lineTerminator,
+            var result = FileAccessLayer.CsvFilePut(csvFile, columns, keyColumn, fieldSeparator, encloser,
+                lineTerminator,
                 commentLineStarter, instance, table, timeoutSeconds);
 
             result.Statistics = StatusHelper.FinalizeStats(requestedTicks, startTicks);
@@ -375,7 +375,11 @@ namespace ZarahDB_Library.AccessLayers
         /// <param name="instance">The instance.</param>
         /// <param name="table">The table.</param>
         /// <param name="key">The key.</param>
-        /// <param name="checkExactMatch">Key collisions are possible. if set to <c>true</c> the file is checked to contain the exact key if there is any chance of collision. Set this to <c>false</c> for the fastest execution when key collisions are known not to exist.</param>
+        /// <param name="checkExactMatch">
+        ///     Key collisions are possible. if set to <c>true</c> the file is checked to contain the
+        ///     exact key if there is any chance of collision. Set this to <c>false</c> for the fastest execution when key
+        ///     collisions are known not to exist.
+        /// </param>
         /// <returns><c>true</c> if the key exists, <c>false</c> if it does not.</returns>
         internal static bool Exists(Uri instance, string table, string key, bool? checkExactMatch = true)
         {
@@ -383,11 +387,15 @@ namespace ZarahDB_Library.AccessLayers
         }
 
         /// <summary>
-        /// Tests for the existence of specified instance.
+        ///     Tests for the existence of specified instance.
         /// </summary>
         /// <param name="instance">The instance.</param>
         /// <param name="table">The table.</param>
-        /// <param name="checkExactMatch">Key collisions are possible. if set to <c>true</c> the file is checked to contain the exact key if there is any chance of collision. Set this to <c>false</c> for the fastest execution when key collisions are known not to exist.</param>
+        /// <param name="checkExactMatch">
+        ///     Key collisions are possible. if set to <c>true</c> the file is checked to contain the
+        ///     exact key if there is any chance of collision. Set this to <c>false</c> for the fastest execution when key
+        ///     collisions are known not to exist.
+        /// </param>
         /// <returns>List of keys, from the KeyList that exist.</returns>
         internal static KeyList Exists(Uri instance, string table, KeyList keyList, bool? checkExactMatch = true)
         {
@@ -551,7 +559,7 @@ namespace ZarahDB_Library.AccessLayers
                 if (existingKey == null)
                 {
                     existing = false;
-                    existingKey = new KeyColumnValues { Key = key };
+                    existingKey = new KeyColumnValues {Key = key};
                 }
                 var newColumnValue = new ColumnValue
                 {
@@ -640,7 +648,7 @@ namespace ZarahDB_Library.AccessLayers
         #region Locks
 
         /// <summary>
-        /// Locks the instance.
+        ///     Locks the instance.
         /// </summary>
         /// <param name="instance">The instance.</param>
         internal static void LockInstance(Uri instance)
@@ -649,7 +657,7 @@ namespace ZarahDB_Library.AccessLayers
         }
 
         /// <summary>
-        /// Unlocks the instance.
+        ///     Unlocks the instance.
         /// </summary>
         /// <param name="instance">The instance.</param>
         internal static void UnlockInstance(Uri instance)
@@ -658,7 +666,7 @@ namespace ZarahDB_Library.AccessLayers
         }
 
         /// <summary>
-        /// Gets the instance lock status.
+        ///     Gets the instance lock status.
         /// </summary>
         /// <param name="instance">The instance.</param>
         /// <returns>StatusMessageValue.</returns>
@@ -667,7 +675,7 @@ namespace ZarahDB_Library.AccessLayers
             var requestedTicks = StringHelper.NowTicks();
             var startTicks = requestedTicks;
 
-            bool instanceLocked = FileAccessLayer.GetInstanceLock(instance);
+            var instanceLocked = FileAccessLayer.GetInstanceLock(instance);
 
             var result = StatusHelper.SetStatusMessageValue(StatusCode.OK, instanceLocked.ToString());
             result.Statistics = StatusHelper.FinalizeStats(requestedTicks, startTicks);
@@ -676,7 +684,7 @@ namespace ZarahDB_Library.AccessLayers
         }
 
         /// <summary>
-        /// Locks a table.
+        ///     Locks a table.
         /// </summary>
         /// <param name="instance">The instance.</param>
         /// <param name="table">The table.</param>
@@ -686,7 +694,7 @@ namespace ZarahDB_Library.AccessLayers
         }
 
         /// <summary>
-        /// Unlocks a table.
+        ///     Unlocks a table.
         /// </summary>
         /// <param name="instance">The instance.</param>
         /// <param name="table">The table.</param>
@@ -704,7 +712,7 @@ namespace ZarahDB_Library.AccessLayers
             var requestedTicks = StringHelper.NowTicks();
             var startTicks = requestedTicks;
 
-            var maxDepth =FileAccessLayer.GetMaxDepth(instance, table);
+            var maxDepth = FileAccessLayer.GetMaxDepth(instance, table);
             var result = StatusHelper.SetStatusMessageValue(StatusCode.OK, maxDepth.ToString());
             result.Statistics = StatusHelper.FinalizeStats(requestedTicks, startTicks);
 
@@ -738,7 +746,8 @@ namespace ZarahDB_Library.AccessLayers
         /// <param name="column">The column.</param>
         /// <param name="value">The value.</param>
         /// <param name="timeoutSeconds">The timeout seconds.</param>
-        internal static StatusMessageValue Put(StatusTransaction statusTransaction, string table, string key, string column,
+        internal static StatusMessageValue Put(StatusTransaction statusTransaction, string table, string key,
+            string column,
             string value,
             int timeoutSeconds)
         {
@@ -754,7 +763,8 @@ namespace ZarahDB_Library.AccessLayers
             return result;
         }
 
-        internal static StatusMessageValue Put(Uri instance, string table, KeyColumnValues keyColumnValues, int timeoutSeconds)
+        internal static StatusMessageValue Put(Uri instance, string table, KeyColumnValues keyColumnValues,
+            int timeoutSeconds)
         {
             var requestedTicks = StringHelper.NowTicks();
             var startTicks = requestedTicks;
@@ -787,13 +797,14 @@ namespace ZarahDB_Library.AccessLayers
         #region Script
 
         /// <summary>
-        /// Runs an ad hoc script.
+        ///     Runs an ad hoc script.
         /// </summary>
         /// <param name="instance">The instance.</param>
         /// <param name="script">The script.</param>
         /// <param name="variables">The variables.</param>
         /// <returns>StatusTransaction</returns>
-        internal static StatusTransaction Script(Uri instance, string script, Dictionary<string, string> variables = null)
+        internal static StatusTransaction Script(Uri instance, string script,
+            Dictionary<string, string> variables = null)
         {
             //Create the new transaction
             var newStatusTransaction = new StatusTransaction
@@ -840,7 +851,8 @@ namespace ZarahDB_Library.AccessLayers
             return FileAccessLayer.GetScript(instance, scriptName);
         }
 
-        public static StatusTransaction ExecuteScript(Uri instance, string scriptName, Dictionary<string, string> variables)
+        public static StatusTransaction ExecuteScript(Uri instance, string scriptName,
+            Dictionary<string, string> variables)
         {
             var newStatusTransaction = new StatusTransaction();
             if (string.IsNullOrEmpty(instance.AbsolutePath))

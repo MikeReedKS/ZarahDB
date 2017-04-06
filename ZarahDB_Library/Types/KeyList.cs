@@ -17,12 +17,12 @@ using System.Collections.Generic;
 namespace ZarahDB_Library.Types
 {
     /// <summary>
-    /// Class KeyList.
+    ///     Class KeyList.
     /// </summary>
     public class KeyList
     {
         /// <summary>
-        /// Gets or sets the keys.
+        ///     Gets or sets the keys.
         /// </summary>
         /// <value>The keys.</value>
         public List<string> Keys { get; set; } = new List<string>();

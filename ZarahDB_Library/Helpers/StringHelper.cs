@@ -32,12 +32,12 @@ namespace ZarahDB_Library.Helpers
     //limitations under the License.
 
     /// <summary>
-    /// Class StringHelper.
+    ///     Class StringHelper.
     /// </summary>
     public static class StringHelper
     {
         /// <summary>
-        /// Replaces the ex.
+        ///     Replaces the ex.
         /// </summary>
         /// <param name="original">The original.</param>
         /// <param name="pattern">The pattern.</param>
@@ -79,7 +79,7 @@ namespace ZarahDB_Library.Helpers
         }
 
         /// <summary>
-        /// Nows the ticks.
+        ///     Nows the ticks.
         /// </summary>
         /// <returns>System.String.</returns>
         public static string NowTicks()

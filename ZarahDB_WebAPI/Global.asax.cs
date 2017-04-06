@@ -18,12 +18,12 @@ using System.Web.Http;
 namespace ZarahDB_WebAPI
 {
     /// <summary>
-    /// Class WebApiApplication.
+    ///     Class WebApiApplication.
     /// </summary>
     public class WebApiApplication : HttpApplication
     {
         /// <summary>
-        /// Application_s the start.
+        ///     Application_s the start.
         /// </summary>
         protected void Application_Start()
         {

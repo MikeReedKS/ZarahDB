@@ -25,13 +25,13 @@ using ZarahDB_WebAPI.Helpers;
 namespace ZarahDB_WebAPI.Controllers
 {
     /// <summary>
-    /// Class ValueController.
+    ///     Class ValueController.
     /// </summary>
     /// <seealso cref="System.Web.Http.ApiController" />
     public class ValueController : ApiController
     {
         /// <summary>
-        /// Gets the value associated with a single column.
+        ///     Gets the value associated with a single column.
         /// </summary>
         /// <param name="instance">The instance.</param>
         /// <param name="table">The table.</param>
@@ -49,7 +49,8 @@ namespace ZarahDB_WebAPI.Controllers
             var statusKeyColumnValue = new StatusKeyColumnValue();
 
             //Check security to be sure this method is allowed to execute
-            if (!SecurityHelper.MethodAllowed(MethodBase.GetCurrentMethod().Name, ref statusKeyColumnValue)) return statusKeyColumnValue;
+            if (!SecurityHelper.MethodAllowed(MethodBase.GetCurrentMethod().Name, ref statusKeyColumnValue))
+                return statusKeyColumnValue;
             if (!SecurityHelper.InstanceAllowed(instance, ref statusKeyColumnValue)) return statusKeyColumnValue;
 
             //Update instance to physical path based on InstancesRootFolder
@@ -77,7 +78,7 @@ namespace ZarahDB_WebAPI.Controllers
         }
 
         /// <summary>
-        /// Gets the values associated with a list of columns for a single key.
+        ///     Gets the values associated with a list of columns for a single key.
         /// </summary>
         /// <param name="getColumnsDto">The getColumnsDto.</param>
         /// <returns>StatusMessageValue</returns>
@@ -108,7 +109,8 @@ namespace ZarahDB_WebAPI.Controllers
             var statusKeyColumnValues = new StatusKeyColumnValues();
             try
             {
-                statusKeyColumnValues = ZarahDB.Get(localPath == null ? null : new Uri(localPath), getColumnsDto.Table, getColumnsDto.Key, getColumnsDto.Columns);
+                statusKeyColumnValues = ZarahDB.Get(localPath == null ? null : new Uri(localPath), getColumnsDto.Table,
+                    getColumnsDto.Key, getColumnsDto.Columns);
             }
             catch (Exception ex)
             {
@@ -122,7 +124,7 @@ namespace ZarahDB_WebAPI.Controllers
         }
 
         /// <summary>
-        /// Stores a single value.
+        ///     Stores a single value.
         /// </summary>
         /// <param name="instance">The instance.</param>
         /// <param name="table">The table.</param>
@@ -144,7 +146,8 @@ namespace ZarahDB_WebAPI.Controllers
             var statusMessageValue = new StatusMessageValue();
 
             //Check security to be sure this method is allowed to execute
-            if (!SecurityHelper.MethodAllowed(MethodBase.GetCurrentMethod().Name, ref statusMessageValue)) return statusMessageValue;
+            if (!SecurityHelper.MethodAllowed(MethodBase.GetCurrentMethod().Name, ref statusMessageValue))
+                return statusMessageValue;
             if (!SecurityHelper.InstanceAllowed(instance, ref statusMessageValue)) return statusMessageValue;
 
             //Update instance to physical path based on InstancesRootFolder
@@ -163,7 +166,7 @@ namespace ZarahDB_WebAPI.Controllers
         }
 
         /// <summary>
-        /// Stores any number of values across any number of keys.
+        ///     Stores any number of values across any number of keys.
         /// </summary>
         /// <param name="instance">The instance.</param>
         /// <param name="table">The table.</param>
@@ -181,7 +184,8 @@ namespace ZarahDB_WebAPI.Controllers
             var statusMessageValue = new StatusMessageValue();
 
             //Check security to be sure this method is allowed to execute
-            if (!SecurityHelper.MethodAllowed(MethodBase.GetCurrentMethod().Name, ref statusMessageValue)) return statusMessageValue;
+            if (!SecurityHelper.MethodAllowed(MethodBase.GetCurrentMethod().Name, ref statusMessageValue))
+                return statusMessageValue;
             if (!SecurityHelper.InstanceAllowed(instance, ref statusMessageValue)) return statusMessageValue;
 
             //Update instance to physical path based on InstancesRootFolder
@@ -190,7 +194,8 @@ namespace ZarahDB_WebAPI.Controllers
             //Call the method
             try
             {
-                statusMessageValue = ZarahDB.Put(new Uri(instance), table, statusKeysColumnValues.KeysColumnValues, timeoutSeconds);
+                statusMessageValue = ZarahDB.Put(new Uri(instance), table, statusKeysColumnValues.KeysColumnValues,
+                    timeoutSeconds);
             }
             catch (Exception ex)
             {

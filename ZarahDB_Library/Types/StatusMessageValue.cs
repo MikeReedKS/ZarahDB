@@ -36,7 +36,6 @@ namespace ZarahDB_Library.Types
     /// </summary>
     public class StatusMessageValue
     {
-
         /// <summary>
         ///     Gets or sets the status.
         /// </summary>
@@ -45,7 +44,7 @@ namespace ZarahDB_Library.Types
         public string Status { get; set; }
 
         /// <summary>
-        /// Gets or sets the message.
+        ///     Gets or sets the message.
         /// </summary>
         /// <value>The message.</value>
         [Required]
@@ -59,7 +58,7 @@ namespace ZarahDB_Library.Types
         public string Value { get; set; }
 
         /// <summary>
-        /// Gets or sets the stats.
+        ///     Gets or sets the stats.
         /// </summary>
         /// <value>The stats.</value>
         [Required]

@@ -22,12 +22,12 @@ using ZarahDB_Library.Types;
 namespace ZarahDB_WebAPI.Helpers
 {
     /// <summary>
-    /// Class SecurityHelper.
+    ///     Class SecurityHelper.
     /// </summary>
-    class SecurityHelper
+    internal class SecurityHelper
     {
         /// <summary>
-        /// Methods the allowed.
+        ///     Methods the allowed.
         /// </summary>
         /// <param name="methodName">Name of the method.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
@@ -38,7 +38,7 @@ namespace ZarahDB_WebAPI.Helpers
         }
 
         /// <summary>
-        /// Methods the allowed.
+        ///     Methods the allowed.
         /// </summary>
         /// <param name="methodName">Name of the method.</param>
         /// <param name="statusMessageValue">The status message value.</param>
@@ -59,7 +59,7 @@ namespace ZarahDB_WebAPI.Helpers
         }
 
         /// <summary>
-        /// Methods the allowed.
+        ///     Methods the allowed.
         /// </summary>
         /// <param name="methodName">Name of the method.</param>
         /// <param name="statusKeyColumnValue">The status key value.</param>
@@ -80,7 +80,7 @@ namespace ZarahDB_WebAPI.Helpers
         }
 
         /// <summary>
-        /// Methods the allowed.
+        ///     Methods the allowed.
         /// </summary>
         /// <param name="methodName">Name of the method.</param>
         /// <param name="statusList">The status list.</param>
@@ -101,7 +101,7 @@ namespace ZarahDB_WebAPI.Helpers
         }
 
         /// <summary>
-        /// Methods the allowed.
+        ///     Methods the allowed.
         /// </summary>
         /// <param name="methodName">Name of the method.</param>
         /// <param name="statusKeyColumnValues">The status key column values.</param>
@@ -122,7 +122,7 @@ namespace ZarahDB_WebAPI.Helpers
         }
 
         /// <summary>
-        /// Methods the allowed.
+        ///     Methods the allowed.
         /// </summary>
         /// <param name="methodName">Name of the method.</param>
         /// <param name="statusTransaction">The status transaction.</param>
@@ -144,7 +144,7 @@ namespace ZarahDB_WebAPI.Helpers
         }
 
         /// <summary>
-        /// Instances the allowed.
+        ///     Instances the allowed.
         /// </summary>
         /// <param name="instance">The instance.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
@@ -158,13 +158,13 @@ namespace ZarahDB_WebAPI.Helpers
                 return true;
             }
 
-            var instancesAllowed = instancesAllowedList.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+            var instancesAllowed = instancesAllowedList.Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries);
 
             return instancesAllowed.Any() && instancesAllowed.Contains(instance);
         }
 
         /// <summary>
-        /// Instances the allowed.
+        ///     Instances the allowed.
         /// </summary>
         /// <param name="instance">The instance.</param>
         /// <param name="statusMessageValue">The status message value.</param>
@@ -179,7 +179,8 @@ namespace ZarahDB_WebAPI.Helpers
                 return true;
             }
 
-            var instancesAllowed = instancesAllowedList.ToLower().Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+            var instancesAllowed = instancesAllowedList.ToLower()
+                .Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries);
 
             if (instancesAllowed.Any())
             {
@@ -198,7 +199,7 @@ namespace ZarahDB_WebAPI.Helpers
         }
 
         /// <summary>
-        /// Instances the allowed.
+        ///     Instances the allowed.
         /// </summary>
         /// <param name="instance">The instance.</param>
         /// <param name="statusKeyColumnValue">The status key value.</param>
@@ -213,7 +214,8 @@ namespace ZarahDB_WebAPI.Helpers
                 return true;
             }
 
-            var instancesAllowed = instancesAllowedList.ToLower().Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+            var instancesAllowed = instancesAllowedList.ToLower()
+                .Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries);
 
             if (instancesAllowed.Any())
             {
@@ -232,7 +234,7 @@ namespace ZarahDB_WebAPI.Helpers
         }
 
         /// <summary>
-        /// Instances the allowed.
+        ///     Instances the allowed.
         /// </summary>
         /// <param name="instance">The instance.</param>
         /// <param name="statusList">The status list.</param>
@@ -247,7 +249,8 @@ namespace ZarahDB_WebAPI.Helpers
                 return true;
             }
 
-            var instancesAllowed = instancesAllowedList.ToLower().Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+            var instancesAllowed = instancesAllowedList.ToLower()
+                .Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries);
 
             if (instancesAllowed.Any())
             {
@@ -266,7 +269,7 @@ namespace ZarahDB_WebAPI.Helpers
         }
 
         /// <summary>
-        /// Instances the allowed.
+        ///     Instances the allowed.
         /// </summary>
         /// <param name="instance">The instance.</param>
         /// <param name="statusTransaction">The status transaction.</param>
@@ -281,7 +284,7 @@ namespace ZarahDB_WebAPI.Helpers
                 return true;
             }
 
-            var instancesAllowed = instancesAllowedList.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+            var instancesAllowed = instancesAllowedList.Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries);
 
             if (instancesAllowed.Any())
             {
@@ -300,7 +303,7 @@ namespace ZarahDB_WebAPI.Helpers
         }
 
         /// <summary>
-        /// Instances the allowed.
+        ///     Instances the allowed.
         /// </summary>
         /// <param name="instance">The instance.</param>
         /// <param name="statusKeyColumnValues">The status key column values.</param>
@@ -315,7 +318,7 @@ namespace ZarahDB_WebAPI.Helpers
                 return true;
             }
 
-            var instancesAllowed = instancesAllowedList.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+            var instancesAllowed = instancesAllowedList.Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries);
 
             if (instancesAllowed.Any())
             {

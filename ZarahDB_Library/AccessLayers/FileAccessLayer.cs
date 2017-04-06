@@ -50,6 +50,135 @@ namespace ZarahDB_Library.AccessLayers
 
     internal static class FileAccessLayer
     {
+        #region Key Index
+
+        /// <summary>
+        ///     Creates the index. The index is a fully qualified path to the key's json file.
+        /// </summary>
+        /// <param name="instance">The instance.</param>
+        /// <param name="table">The table.</param>
+        /// <param name="key">The key.</param>
+        /// <returns>System.String</returns>
+        internal static string CreateKeyIndex(Uri instance, string table, string key)
+        {
+            var index = instance.AbsolutePath;
+            table = DirectoryHelper.CreateLegalDirectoryName(table, key);
+            if (!string.IsNullOrEmpty(table)) index = Path.Combine(index, table);
+
+            var fileName = CreateLegalJSONFilename(key);
+
+            var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(fileName);
+            if (!string.IsNullOrEmpty(fileNameWithoutExtension))
+            {
+                var nameLength = fileNameWithoutExtension.Length;
+                var zdbFolders = "";
+
+                var maxDepth = GetMaxDepth(instance, table);
+                var depth = Math.Min(nameLength, maxDepth - 1);
+                for (var i = depth; i >= 0; i--)
+                {
+                    if (nameLength > i) zdbFolders = fileName.Substring(i, 1) + @"\" + zdbFolders;
+                }
+
+                zdbFolders = zdbFolders.Replace(" ", "_");
+                index = Path.Combine(index, zdbFolders);
+            }
+            if (!string.IsNullOrEmpty(fileName))
+            {
+                index = Path.Combine(index, fileName);
+            }
+
+            index = StringHelper.ReplaceEx(index, @"\__\", @"\");
+            return index;
+        }
+
+        #endregion
+
+        #region Insert
+
+        private static bool InsertKey(string index, KeyColumnValues keyColumnValues)
+        {
+            var keyColumnValueses = new List<KeyColumnValues> {keyColumnValues};
+            try
+            {
+                var json = JsonConvert.SerializeObject(keyColumnValueses);
+                json = "{ " + $"\"Keys\":{json}}}";
+
+                DirectoryHelper.AssureDirectoryExists(Path.GetDirectoryName(index));
+                File.WriteAllText(index, json);
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
+        }
+
+        #endregion
+
+        #region JSON
+
+        /// <summary>
+        ///     Creates the legal json filename.
+        /// </summary>
+        /// <param name="key">The key.</param>
+        /// <returns>System.String</returns>
+        internal static string CreateLegalJSONFilename(string key)
+        {
+            if (string.IsNullOrEmpty(key))
+            {
+                return key;
+            }
+
+            //Make the cleaned text all lower case
+            var legalJSONFilename = key.ToLowerInvariant();
+
+            //Remove illegal characters
+            var regexRemovePunctuation =
+                new Regex(@"[\`!@#$%^&*\(\)_\+\-=\{\}\[\]\|\\:;\" + "\"" + @"\'<>,.?\™\©\…\“\‘\-\.\0]");
+            legalJSONFilename = regexRemovePunctuation.Replace(legalJSONFilename, "");
+
+            //Only process if there is something to process
+            if (string.IsNullOrEmpty(legalJSONFilename.Trim())) return "null.json";
+
+            //Remove Linefeed
+            legalJSONFilename = StringHelper.ReplaceEx(legalJSONFilename, "\n", " ");
+
+            //Remove Carriage Return
+            legalJSONFilename = StringHelper.ReplaceEx(legalJSONFilename, "\r", " ");
+
+            //Remove Tab
+            legalJSONFilename = StringHelper.ReplaceEx(legalJSONFilename, "\t", " ");
+
+            //Remove Backslash
+            legalJSONFilename = StringHelper.ReplaceEx(legalJSONFilename, "\\", " ");
+
+            //Remove Foreword Slash
+            legalJSONFilename = StringHelper.ReplaceEx(legalJSONFilename, @"/", " ");
+
+            //Remove any extra spaces
+            while (legalJSONFilename.Contains("  "))
+            {
+                legalJSONFilename = legalJSONFilename.Replace("  ", " ");
+            }
+
+            try
+            {
+                legalJSONFilename = Path.ChangeExtension(legalJSONFilename, ".json");
+            }
+            catch (ArgumentException)
+            {
+                return "invalid.JSON";
+            }
+
+            //After processing, make sure we still have a filename
+            if (string.IsNullOrEmpty(legalJSONFilename.Trim())) return "null.json";
+
+            return legalJSONFilename;
+        }
+
+        #endregion
+
         #region Create
 
         public static StatusMessageValue CreateInstance(Uri instance)
@@ -60,12 +189,14 @@ namespace ZarahDB_Library.AccessLayers
                 var alreadyExists = Exists(instance);
                 if (alreadyExists)
                 {
-                    statusMessageValue = StatusHelper.SetStatusMessageValue(StatusCode.Internal_Server_Error, "Instance already exists");
+                    statusMessageValue = StatusHelper.SetStatusMessageValue(StatusCode.Internal_Server_Error,
+                        "Instance already exists");
                 }
                 else
                 {
                     DirectoryHelper.AssureDirectoryExists(instance.AbsolutePath);
-                    statusMessageValue = Exists(instance) ? StatusHelper.SetStatusMessageValue(StatusCode.OK, "")
+                    statusMessageValue = Exists(instance)
+                        ? StatusHelper.SetStatusMessageValue(StatusCode.OK, "")
                         : StatusHelper.SetStatusMessageValue(StatusCode.Internal_Server_Error, "Instance not created");
                 }
             }
@@ -197,8 +328,8 @@ namespace ZarahDB_Library.AccessLayers
         #region CSV
 
         public static StatusMessageValue CsvPut(string csvData, List<string> columns, string keyColumn,
-    string fieldSeparator, string encloser, string lineTerminator, string commentLineStarter, Uri instance,
-    string table, int timeoutSeconds)
+            string fieldSeparator, string encloser, string lineTerminator, string commentLineStarter, Uri instance,
+            string table, int timeoutSeconds)
         {
             StatusMessageValue statusMessageValue;
 
@@ -233,7 +364,8 @@ namespace ZarahDB_Library.AccessLayers
                     var values = ParseCsvLine(line, fieldSeparator, encloser, lineTerminator, commentLineStarter);
                     if (columns.Count() != values.Count())
                     {
-                        statusMessageValue = StatusHelper.SetStatusMessageValue(StatusCode.Internal_Server_Error, "Different number of columns and values.");
+                        statusMessageValue = StatusHelper.SetStatusMessageValue(StatusCode.Internal_Server_Error,
+                            "Different number of columns and values.");
                         return statusMessageValue;
                     }
                     PutColumns(columns, keyColumn, values, instance, table, timeoutSeconds);
@@ -283,7 +415,8 @@ namespace ZarahDB_Library.AccessLayers
                     var values = ParseCsvLine(line, fieldSeparator, encloser, lineTerminator, commentLineStarter);
                     if (columns.Count() != values.Count())
                     {
-                        statusMessageValue = StatusHelper.SetStatusMessageValue(StatusCode.Internal_Server_Error, "Different number of columns and values.");
+                        statusMessageValue = StatusHelper.SetStatusMessageValue(StatusCode.Internal_Server_Error,
+                            "Different number of columns and values.");
                         return statusMessageValue;
                     }
                     PutColumns(columns, keyColumn, values, instance, table, timeoutSeconds);
@@ -330,7 +463,7 @@ namespace ZarahDB_Library.AccessLayers
                             if (newLineValue.EndsWith(encloser))
                             {
                                 newLineValue = newLineValue.Substring(encloser.Length,
-                                    newLineValue.Length - (encloser.Length * 2));
+                                    newLineValue.Length - (encloser.Length*2));
                             }
                         }
                     }
@@ -460,7 +593,6 @@ namespace ZarahDB_Library.AccessLayers
             catch (Exception e)
             {
                 statusMessageValue = StatusHelper.SetStatusMessageValue(StatusCode.Exception, e.Message);
-
             }
 
             return statusMessageValue;
@@ -495,7 +627,7 @@ namespace ZarahDB_Library.AccessLayers
         #region Exists
 
         /// <summary>
-        /// Tests if the specified instance exists.
+        ///     Tests if the specified instance exists.
         /// </summary>
         /// <param name="instance">The instance.</param>
         /// <returns>System.Boolean</returns>
@@ -512,7 +644,7 @@ namespace ZarahDB_Library.AccessLayers
         }
 
         /// <summary>
-        /// Tests if the specified table exists.
+        ///     Tests if the specified table exists.
         /// </summary>
         /// <param name="instance">The instance.</param>
         /// <param name="table">The table.</param>
@@ -532,12 +664,16 @@ namespace ZarahDB_Library.AccessLayers
         }
 
         /// <summary>
-        /// Tests if the specified key exists.
+        ///     Tests if the specified key exists.
         /// </summary>
         /// <param name="instance">The instance.</param>
         /// <param name="table">The table.</param>
         /// <param name="key">The key.</param>
-        /// <param name="checkExactMatch">Key collisions are possible. if set to <c>true</c> the file is checked to contain the exact key if there is any chance of collision. Set this to <c>false</c> for the fastest execution when key collisions are known not to exist.</param>
+        /// <param name="checkExactMatch">
+        ///     Key collisions are possible. if set to <c>true</c> the file is checked to contain the
+        ///     exact key if there is any chance of collision. Set this to <c>false</c> for the fastest execution when key
+        ///     collisions are known not to exist.
+        /// </param>
         /// <returns><c>true</c> if the key exists, <c>false</c> if it does not.</returns>
         internal static bool Exists(Uri instance, string table, string key, bool? checkExactMatch = true)
         {
@@ -557,7 +693,7 @@ namespace ZarahDB_Library.AccessLayers
                 {
                     return false;
                 }
-                if (indexKey.Equals(key,StringComparison.OrdinalIgnoreCase))
+                if (indexKey.Equals(key, StringComparison.OrdinalIgnoreCase))
                 {
                     return File.Exists(index);
                 }
@@ -583,12 +719,16 @@ namespace ZarahDB_Library.AccessLayers
         }
 
         /// <summary>
-        /// Tests if any of a list of keys exist.
+        ///     Tests if any of a list of keys exist.
         /// </summary>
         /// <param name="instance">The instance.</param>
         /// <param name="table">The table.</param>
         /// <param name="keyList">The keys.</param>
-        /// <param name="checkExactMatch">Key collisions are possible. if set to <c>true</c> the file is checked to contain the exact key if there is any chance of collision. Set this to <c>false</c> for the fastest execution when key collisions are known not to exist.</param>
+        /// <param name="checkExactMatch">
+        ///     Key collisions are possible. if set to <c>true</c> the file is checked to contain the
+        ///     exact key if there is any chance of collision. Set this to <c>false</c> for the fastest execution when key
+        ///     collisions are known not to exist.
+        /// </param>
         /// <returns><c>true</c> if the key exists, <c>false</c> if it does not.</returns>
         internal static KeyList Exists(Uri instance, string table, KeyList keyList, bool? checkExactMatch = true)
         {
@@ -636,7 +776,7 @@ namespace ZarahDB_Library.AccessLayers
 
             foreach (var key in keys)
             {
-                var newKeyColumnValues = new KeyColumnValues { Key = key["Key"].ToString() };
+                var newKeyColumnValues = new KeyColumnValues {Key = key["Key"].ToString()};
                 foreach (var columnValue in key["ColumnValues"])
                 {
                     var newColumnValue = new ColumnValue
@@ -652,50 +792,6 @@ namespace ZarahDB_Library.AccessLayers
             }
 
             return keyColumnValues;
-        }
-
-        #endregion
-
-        #region Key Index
-
-        /// <summary>
-        ///     Creates the index. The index is a fully qualified path to the key's json file.
-        /// </summary>
-        /// <param name="instance">The instance.</param>
-        /// <param name="table">The table.</param>
-        /// <param name="key">The key.</param>
-        /// <returns>System.String</returns>
-        internal static string CreateKeyIndex(Uri instance, string table, string key)
-        {
-            var index = instance.AbsolutePath;
-            table = DirectoryHelper.CreateLegalDirectoryName(table, key);
-            if (!string.IsNullOrEmpty(table)) index = Path.Combine(index, table);
-
-            var fileName = CreateLegalJSONFilename(key);
-
-            var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(fileName);
-            if (!string.IsNullOrEmpty(fileNameWithoutExtension))
-            {
-                var nameLength = fileNameWithoutExtension.Length;
-                var zdbFolders = "";
-
-                var maxDepth = GetMaxDepth(instance, table);
-                var depth = Math.Min(nameLength, maxDepth - 1);
-                for (var i = depth; i >= 0; i--)
-                {
-                    if (nameLength > i) zdbFolders = fileName.Substring(i, 1) + @"\" + zdbFolders;
-                }
-
-                zdbFolders = zdbFolders.Replace(" ", "_");
-                index = Path.Combine(index, zdbFolders);
-            }
-            if (!string.IsNullOrEmpty(fileName))
-            {
-                index = Path.Combine(index, fileName);
-            }
-
-            index = StringHelper.ReplaceEx(index, @"\__\", @"\");
-            return index;
         }
 
         #endregion
@@ -721,13 +817,13 @@ namespace ZarahDB_Library.AccessLayers
             {
                 var fi = new FileInfo(index);
                 var indexColumn = fi.Name;
-                var indexColumns = indexColumn.Split(new[] { '~' }, StringSplitOptions.RemoveEmptyEntries);
+                var indexColumns = indexColumn.Split(new[] {'~'}, StringSplitOptions.RemoveEmptyEntries);
                 var newIndexColumnKeyValues = new IndexColumnKeyValues();
                 foreach (var column in indexColumns)
                 {
                     newIndexColumnKeyValues.Index = index;
                     newIndexColumnKeyValues.IndexColumn = indexColumn;
-                    var newColumnKeyValues = new ColumnKeyValue { Column = column };
+                    var newColumnKeyValues = new ColumnKeyValue {Column = column};
                     newIndexColumnKeyValues.ColumnKeyValues.Add(newColumnKeyValues);
                 }
                 indexColumnKeyValues.Add(newIndexColumnKeyValues);
@@ -743,7 +839,8 @@ namespace ZarahDB_Library.AccessLayers
                     {
                         foreach (var columnValue in keyColumnValues.ColumnValues)
                         {
-                            if (columnKeyValue.Column != DirectoryHelper.CreateLegalDirectoryName(columnValue.Column)) continue;
+                            if (columnKeyValue.Column != DirectoryHelper.CreateLegalDirectoryName(columnValue.Column))
+                                continue;
                             columnKeyValue.Key = keyColumnValues.Key;
                             columnKeyValue.Column = columnValue.Column;
                             columnKeyValue.Value = columnValue.Value;
@@ -815,91 +912,6 @@ namespace ZarahDB_Library.AccessLayers
         {
             if (indexColumnKeyValue == null) throw new ArgumentNullException(nameof(indexColumnKeyValue));
             //TODO: Mike: Work: Delete the old index entry, which related to the previous value.
-        }
-
-        #endregion
-
-        #region Insert
-
-        private static bool InsertKey(string index, KeyColumnValues keyColumnValues)
-        {
-            var keyColumnValueses = new List<KeyColumnValues> { keyColumnValues };
-            try
-            {
-                var json = JsonConvert.SerializeObject(keyColumnValueses);
-                json = "{ " + $"\"Keys\":{json}}}";
-
-                DirectoryHelper.AssureDirectoryExists(Path.GetDirectoryName(index));
-                File.WriteAllText(index, json);
-            }
-            catch
-            {
-                return false;
-            }
-            return true;
-        }
-
-        #endregion
-
-        #region JSON
-
-        /// <summary>
-        ///     Creates the legal json filename.
-        /// </summary>
-        /// <param name="key">The key.</param>
-        /// <returns>System.String</returns>
-        internal static string CreateLegalJSONFilename(string key)
-        {
-            if (string.IsNullOrEmpty(key))
-            {
-                return key;
-            }
-
-            //Make the cleaned text all lower case
-            var legalJSONFilename = key.ToLowerInvariant();
-
-            //Remove illegal characters
-            var regexRemovePunctuation =
-                new Regex(@"[\`!@#$%^&*\(\)_\+\-=\{\}\[\]\|\\:;\" + "\"" + @"\'<>,.?\™\©\…\“\‘\-\.\0]");
-            legalJSONFilename = regexRemovePunctuation.Replace(legalJSONFilename, "");
-
-            //Only process if there is something to process
-            if (string.IsNullOrEmpty(legalJSONFilename.Trim())) return "null.json";
-
-            //Remove Linefeed
-            legalJSONFilename = StringHelper.ReplaceEx(legalJSONFilename, "\n", " ");
-
-            //Remove Carriage Return
-            legalJSONFilename = StringHelper.ReplaceEx(legalJSONFilename, "\r", " ");
-
-            //Remove Tab
-            legalJSONFilename = StringHelper.ReplaceEx(legalJSONFilename, "\t", " ");
-
-            //Remove Backslash
-            legalJSONFilename = StringHelper.ReplaceEx(legalJSONFilename, "\\", " ");
-
-            //Remove Foreword Slash
-            legalJSONFilename = StringHelper.ReplaceEx(legalJSONFilename, @"/", " ");
-
-            //Remove any extra spaces
-            while (legalJSONFilename.Contains("  "))
-            {
-                legalJSONFilename = legalJSONFilename.Replace("  ", " ");
-            }
-
-            try
-            {
-                legalJSONFilename = Path.ChangeExtension(legalJSONFilename, ".json");
-            }
-            catch (ArgumentException)
-            {
-                return "invalid.JSON";
-            }
-
-            //After processing, make sure we still have a filename
-            if (string.IsNullOrEmpty(legalJSONFilename.Trim())) return "null.json";
-
-            return legalJSONFilename;
         }
 
         #endregion
@@ -1036,7 +1048,7 @@ namespace ZarahDB_Library.AccessLayers
         }
 
         /// <summary>
-        /// Gets the instance lock status.
+        ///     Gets the instance lock status.
         /// </summary>
         /// <param name="instance">The instance.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
@@ -1056,7 +1068,7 @@ namespace ZarahDB_Library.AccessLayers
         }
 
         /// <summary>
-        /// Locks a table. This creates a "table.locked" file in the root of a table.
+        ///     Locks a table. This creates a "table.locked" file in the root of a table.
         /// </summary>
         /// <param name="instance">The instance.</param>
         /// <param name="table">The table.</param>
@@ -1080,7 +1092,7 @@ namespace ZarahDB_Library.AccessLayers
         }
 
         /// <summary>
-        /// Unlocks a table. This deletes any existing "table.locked" file in the root of a table.
+        ///     Unlocks a table. This deletes any existing "table.locked" file in the root of a table.
         /// </summary>
         /// <param name="instance">The instance.</param>
         /// <param name="table">The table.</param>
@@ -1281,7 +1293,7 @@ namespace ZarahDB_Library.AccessLayers
                 if (!keyExists)
                 {
                     //Create a new key
-                    var newKeyColumnValues = new KeyColumnValues { Key = key };
+                    var newKeyColumnValues = new KeyColumnValues {Key = key};
                     var newColumnValues = new ColumnValue
                     {
                         Column = column,
@@ -1317,12 +1329,14 @@ namespace ZarahDB_Library.AccessLayers
             return result;
         }
 
-        internal static StatusMessageValue Put(Uri instance, string table, KeyColumnValues keyColumnValues, int timeoutSeconds)
+        internal static StatusMessageValue Put(Uri instance, string table, KeyColumnValues keyColumnValues,
+            int timeoutSeconds)
         {
             var newStatusMessageValue = new StatusMessageValue();
             foreach (var columnValue in keyColumnValues.ColumnValues)
             {
-                newStatusMessageValue = Put(instance, table, keyColumnValues.Key, columnValue.Column, columnValue.Value, timeoutSeconds);
+                newStatusMessageValue = Put(instance, table, keyColumnValues.Key, columnValue.Column, columnValue.Value,
+                    timeoutSeconds);
             }
             //TODO: Mike: Work: Convert the next method to accept keyColumnValue, check the ticks and call from here.
             return newStatusMessageValue;
@@ -1373,7 +1387,7 @@ namespace ZarahDB_Library.AccessLayers
         }
 
         /// <summary>
-        /// Creates the index. The index is a fully qualified path to the key's json file.
+        ///     Creates the index. The index is a fully qualified path to the key's json file.
         /// </summary>
         /// <param name="instance">The instance.</param>
         /// <param name="scriptName">Name of the script.</param>

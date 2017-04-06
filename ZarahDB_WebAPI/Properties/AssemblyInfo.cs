@@ -39,4 +39,3 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyFileVersion("1.0.0.0")]
 [assembly: InternalsVisibleTo("ZarahDB_WebAPI.Tests")]
 [assembly: InternalsVisibleTo("ZarahDB_WebAPI.Explorables")]
-

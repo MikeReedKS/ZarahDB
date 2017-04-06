@@ -36,6 +36,8 @@ namespace ZarahDB_Library.Types
     /// </summary>
     public class ColumnValue
     {
+        private string _value;
+
         /// <summary>
         ///     Gets or sets the column.
         /// </summary>
@@ -50,10 +52,7 @@ namespace ZarahDB_Library.Types
         [Required]
         public string Value
         {
-            get
-            {
-                return _value;
-            }
+            get { return _value; }
             set
             {
                 if (_value == value) return;
@@ -61,7 +60,6 @@ namespace ZarahDB_Library.Types
                 _value = value;
             }
         }
-        private string _value;
 
         [Required]
         public string PreviousValue { get; set; }

@@ -17,9 +17,9 @@ using System.Collections.Generic;
 namespace ZarahDB_Library.Types
 {
     public class IndexColumnKeyValues
-    /// <summary>
-    /// Class StatusKeysColumnValues.
-    /// </summary>
+        /// <summary>
+        /// Class StatusKeysColumnValues.
+        /// </summary>
     {
         public string Index { get; set; }
         public string IndexColumn { get; set; }

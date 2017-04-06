@@ -21,47 +21,50 @@ using ZarahDB_Library.Types;
 namespace ZarahDB_Library.Helpers
 {
     /// <summary>
-    /// Class StatusHelper.
+    ///     Class StatusHelper.
     /// </summary>
     public static class StatusHelper
     {
         /// <summary>
-        /// Sets the status and message.
+        ///     Sets the status and message.
         /// </summary>
         /// <param name="statusKeysColumnValues">The status keys column values.</param>
         /// <param name="status">The status.</param>
         /// <param name="message">The message.</param>
-        public static void SetStatusKeysColumnValuesStatus(StatusKeysColumnValues statusKeysColumnValues, StatusCode status, StatusCode message)
+        public static void SetStatusKeysColumnValuesStatus(StatusKeysColumnValues statusKeysColumnValues,
+            StatusCode status, StatusCode message)
         {
-            statusKeysColumnValues.Status = ((int)status).ToString();
+            statusKeysColumnValues.Status = ((int) status).ToString();
             statusKeysColumnValues.Message = nameof(message);
         }
 
         /// <summary>
-        /// Sets the status and message.
+        ///     Sets the status and message.
         /// </summary>
         /// <param name="statusKeysColumnValues">The status keys column values.</param>
         /// <param name="statusCode">The status code.</param>
-        public static void SetStatusKeysColumnValuesStatus(StatusKeysColumnValues statusKeysColumnValues, StatusCode statusCode)
+        public static void SetStatusKeysColumnValuesStatus(StatusKeysColumnValues statusKeysColumnValues,
+            StatusCode statusCode)
         {
-            statusKeysColumnValues.Status = ((int)statusCode).ToString();
+            statusKeysColumnValues.Status = ((int) statusCode).ToString();
             statusKeysColumnValues.Message = nameof(statusCode);
         }
 
         /// <summary>
-        /// Sets the status and message.
+        ///     Sets the status and message.
         /// </summary>
         /// <param name="statusKeysColumnValues">The status keys column values.</param>
         /// <param name="status">The status.</param>
         /// <param name="message">The message.</param>
-        public static void SetStatusKeysColumnValuesStatus(StatusKeysColumnValues statusKeysColumnValues, string status, string message)
+        public static void SetStatusKeysColumnValuesStatus(StatusKeysColumnValues statusKeysColumnValues, string status,
+            string message)
         {
             statusKeysColumnValues.Status = status;
             statusKeysColumnValues.Message = message;
         }
 
         /// <summary>
-        /// Sets the command and transaction status.
+        ///     Sets the command and transaction status.
         /// </summary>
         /// <param name="statusTransaction">The status transaction.</param>
         /// <param name="commandStatus">The command status.</param>
@@ -82,48 +85,48 @@ namespace ZarahDB_Library.Helpers
         }
 
         /// <summary>
-        /// Sets the status value.
+        ///     Sets the status value.
         /// </summary>
         /// <param name="statusCode">The status code.</param>
         /// <returns>ZarahDB_Library.StatusValue</returns>
         public static StatusMessageValue SetStatusMessageValue(StatusCode statusCode)
         {
-            return SetStatusMessageValue(((int)statusCode).ToString(), statusCode.ToString(), "");
+            return SetStatusMessageValue(((int) statusCode).ToString(), statusCode.ToString(), "");
         }
 
         /// <summary>
-        /// Sets the status key value.
+        ///     Sets the status key value.
         /// </summary>
         /// <param name="statusCode">The status code.</param>
         /// <returns>StatusKeyColumnValue.</returns>
         public static StatusKeyColumnValue SetStatusKeyColumnValue(StatusCode statusCode)
         {
-            return SetStatusKeyColumnValue(((int)statusCode).ToString(), statusCode.ToString(), "");
+            return SetStatusKeyColumnValue(((int) statusCode).ToString(), statusCode.ToString(), "");
         }
 
         /// <summary>
-        /// Sets the status list.
+        ///     Sets the status list.
         /// </summary>
         /// <param name="statusCode">The status code.</param>
         /// <returns>StatusList.</returns>
         public static StatusList SetStatusList(StatusCode statusCode)
         {
-            return SetStatusList(((int)statusCode).ToString(), statusCode.ToString(), "");
+            return SetStatusList(((int) statusCode).ToString(), statusCode.ToString(), "");
         }
 
         /// <summary>
-        /// Sets the status list.
+        ///     Sets the status list.
         /// </summary>
         /// <param name="statusCode">The status code.</param>
         /// <param name="list">The list.</param>
         /// <returns>StatusList.</returns>
         public static StatusList SetStatusList(StatusCode statusCode, List<string> list)
         {
-            return SetStatusList(((int)statusCode).ToString(), statusCode.ToString(), list);
+            return SetStatusList(((int) statusCode).ToString(), statusCode.ToString(), list);
         }
 
         /// <summary>
-        /// Sets the status value.
+        ///     Sets the status value.
         /// </summary>
         /// <param name="statusCode">The status code.</param>
         /// <param name="value">The value.</param>
@@ -134,7 +137,7 @@ namespace ZarahDB_Library.Helpers
         }
 
         /// <summary>
-        /// Sets the status value.
+        ///     Sets the status value.
         /// </summary>
         /// <param name="status">The status.</param>
         /// <param name="message">The message.</param>
@@ -152,7 +155,7 @@ namespace ZarahDB_Library.Helpers
         }
 
         /// <summary>
-        /// Sets the status key column value.
+        ///     Sets the status key column value.
         /// </summary>
         /// <param name="status">The status.</param>
         /// <param name="message">The message.</param>
@@ -170,7 +173,7 @@ namespace ZarahDB_Library.Helpers
         }
 
         /// <summary>
-        /// Sets the status value.
+        ///     Sets the status value.
         /// </summary>
         /// <param name="status">The status.</param>
         /// <param name="message">The message.</param>
@@ -188,7 +191,7 @@ namespace ZarahDB_Library.Helpers
         }
 
         /// <summary>
-        /// Sets the status list.
+        ///     Sets the status list.
         /// </summary>
         /// <param name="status">The status.</param>
         /// <param name="message">The message.</param>
@@ -207,7 +210,7 @@ namespace ZarahDB_Library.Helpers
         }
 
         /// <summary>
-        /// Sets the transaction status.
+        ///     Sets the transaction status.
         /// </summary>
         /// <param name="statusTransaction">The status transaction.</param>
         /// <param name="status">The status.</param>
@@ -219,7 +222,7 @@ namespace ZarahDB_Library.Helpers
         }
 
         /// <summary>
-        /// Sets the transaction status.
+        ///     Sets the transaction status.
         /// </summary>
         /// <param name="statusTransaction">The status transaction.</param>
         /// <param name="status">The status.</param>
@@ -231,7 +234,7 @@ namespace ZarahDB_Library.Helpers
         }
 
         /// <summary>
-        /// Sets the transaction status.
+        ///     Sets the transaction status.
         /// </summary>
         /// <param name="statusTransaction">The status transaction.</param>
         /// <param name="status">The status.</param>
@@ -243,7 +246,7 @@ namespace ZarahDB_Library.Helpers
         }
 
         /// <summary>
-        /// Sets the transaction status.
+        ///     Sets the transaction status.
         /// </summary>
         /// <param name="statusTransaction">The status transaction.</param>
         /// <param name="keyColumnValues">The key column values.</param>
@@ -256,7 +259,7 @@ namespace ZarahDB_Library.Helpers
         }
 
         /// <summary>
-        /// Sets the transaction status.
+        ///     Sets the transaction status.
         /// </summary>
         /// <param name="statusTransaction">The status transaction.</param>
         /// <param name="keyColumnValues">The key column values.</param>
@@ -288,7 +291,7 @@ namespace ZarahDB_Library.Helpers
         }
 
         /// <summary>
-        /// Sets the start ticks.
+        ///     Sets the start ticks.
         /// </summary>
         /// <param name="statistics">The statistics.</param>
         public static void SetStartTicks(Statistics statistics)
@@ -305,7 +308,7 @@ namespace ZarahDB_Library.Helpers
         }
 
         /// <summary>
-        /// Sets the start ticks.
+        ///     Sets the start ticks.
         /// </summary>
         /// <param name="statusTransaction">The status transaction.</param>
         public static void SetStartTicks(StatusTransaction statusTransaction)
@@ -317,7 +320,7 @@ namespace ZarahDB_Library.Helpers
         }
 
         /// <summary>
-        /// Sets the start ticks.
+        ///     Sets the start ticks.
         /// </summary>
         /// <param name="statusMessageValue">The status message value.</param>
         public static void SetStartTicks(StatusMessageValue statusMessageValue)
@@ -329,7 +332,7 @@ namespace ZarahDB_Library.Helpers
         }
 
         /// <summary>
-        /// Sets the end ticks.
+        ///     Sets the end ticks.
         /// </summary>
         /// <param name="statusTransaction">The status transaction.</param>
         public static void SetEndTicks(StatusTransaction statusTransaction)
@@ -338,7 +341,7 @@ namespace ZarahDB_Library.Helpers
         }
 
         /// <summary>
-        /// Finalizes the stats.
+        ///     Finalizes the stats.
         /// </summary>
         /// <param name="requestedTicks">The requested ticks.</param>
         /// <param name="startTicks">The start ticks.</param>
@@ -357,23 +360,23 @@ namespace ZarahDB_Library.Helpers
             {
                 RequestedTicks = Convert.ToInt64(requestedTicks),
                 StartTicks = Convert.ToInt64(startTicks),
-                EndTicks = Convert.ToInt64(StringHelper.NowTicks()),
+                EndTicks = Convert.ToInt64(StringHelper.NowTicks())
             };
             return newStats;
         }
 
         /// <summary>
-        /// Sets the status transaction.
+        ///     Sets the status transaction.
         /// </summary>
         /// <param name="statusCode">The status code.</param>
         /// <returns>StatusTransaction.</returns>
         public static StatusTransaction SetStatusTransaction(StatusCode statusCode)
         {
-            return SetStatusTransaction(((int)statusCode).ToString(), statusCode.ToString());
+            return SetStatusTransaction(((int) statusCode).ToString(), statusCode.ToString());
         }
 
         /// <summary>
-        /// Sets the status transaction.
+        ///     Sets the status transaction.
         /// </summary>
         /// <param name="statusCode">The status code.</param>
         /// <param name="message">The message.</param>
@@ -390,7 +393,7 @@ namespace ZarahDB_Library.Helpers
         }
 
         /// <summary>
-        /// Sets the status key column values.
+        ///     Sets the status key column values.
         /// </summary>
         /// <param name="statusCode">The status code.</param>
         /// <returns>StatusKeyColumnValues.</returns>
@@ -398,7 +401,7 @@ namespace ZarahDB_Library.Helpers
         {
             var newStatusKeyColumnValues = new StatusKeyColumnValues
             {
-                Status = ((int)statusCode).ToString(),
+                Status = ((int) statusCode).ToString(),
                 Message = statusCode.ToString()
             };
 
@@ -406,7 +409,7 @@ namespace ZarahDB_Library.Helpers
         }
 
         /// <summary>
-        /// Sets the requested ticks.
+        ///     Sets the requested ticks.
         /// </summary>
         /// <param name="statistics">The statistics.</param>
         public static void SetRequestedTicks(Statistics statistics)
@@ -416,6 +419,5 @@ namespace ZarahDB_Library.Helpers
                 statistics.RequestedTicks = DateTime.UtcNow.Ticks;
             }
         }
-
     }
 }
