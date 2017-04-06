@@ -200,8 +200,8 @@ namespace ConsoleApplication1
 
 Additionally we can use `complexObject = JsonConvert.DeserializeObject< ComplexObject>(value);` to get the value converted back from a document (JSON Blob in this case) to a complex object used in our program. Imagine how easy this makes storing your settings or other program data, no longer do you need to map to and from tables, think about what data goes where or many of the complexities of storing data in a typical SQL database.
 
-Where would I use this?
+## Where would I use this?
 
 Anywhere that you have a unique ID that maps to a set of data. That's not every case, but it happens quite frequetly. If you have objects in your program that you reference by ID (number, word, anything unique) then you can save the entire object into a ZarahDB and extract it again, each in a single line of code. How cool is that?
 
-There are many uses for a ZarahDB, so how will you use it?
+## There are many uses for a ZarahDB, so how will you use it?
