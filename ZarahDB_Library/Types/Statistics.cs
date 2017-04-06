@@ -17,7 +17,7 @@ using System.ComponentModel.DataAnnotations;
 namespace ZarahDB_Library.Types
 {
     /// <summary>
-    /// Class IndexColumnKeyValues.
+    ///     Class IndexColumnKeyValues.
     /// </summary>
     public class Statistics
     {
@@ -27,19 +27,26 @@ namespace ZarahDB_Library.Types
         /// </summary>
         /// <value>The index column.</value>
         public long RequestedTicks { get; set; }
+
         [Required]
         public long StartTicks { get; set; }
+
         [Required]
         public long EndTicks { get; set; }
+
         [Required]
         public long BlockedTicks => (StartTicks - RequestedTicks);
+
         [Required]
         public long ExecuteTicks => (EndTicks - StartTicks);
+
         [Required]
         public long TotalTicks => (EndTicks - RequestedTicks);
+
         [Required]
-        public string Blocked => $"{(StartTicks - RequestedTicks) / 10000000.0} seconds.";
+        public string Blocked => $"{(StartTicks - RequestedTicks)/10000000.0} seconds.";
+
         [Required]
-        public string Duration => $"{(EndTicks - RequestedTicks) / 10000000.0} seconds.";
+        public string Duration => $"{(EndTicks - RequestedTicks)/10000000.0} seconds.";
     }
 }

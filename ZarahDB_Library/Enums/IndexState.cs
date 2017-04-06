@@ -15,24 +15,27 @@
 namespace ZarahDB_Library.Enums
 {
     /// <summary>
-    /// Enum IndexState
+    ///     Enum IndexState
     /// </summary>
     public enum IndexState
     {
         /// <summary>
-        /// The unknown
+        ///     The unknown
         /// </summary>
         Unknown = 0,
+
         /// <summary>
-        /// The locked
+        ///     The locked
         /// </summary>
         Locked = 1,
+
         /// <summary>
-        /// The unlocked
+        ///     The unlocked
         /// </summary>
         Unlocked = 2,
+
         /// <summary>
-        /// The does not exist
+        ///     The does not exist
         /// </summary>
         DoesNotExist = 3
     }

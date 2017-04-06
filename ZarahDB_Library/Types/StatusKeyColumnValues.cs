@@ -52,7 +52,7 @@ namespace ZarahDB_Library.Types
         public string Message { get; set; }
 
         /// <summary>
-        /// Gets or sets the value.
+        ///     Gets or sets the value.
         /// </summary>
         /// <value>The value.</value>
         [Required]
@@ -72,9 +72,8 @@ namespace ZarahDB_Library.Types
         [Required]
         public Dictionary<string, string> ColumnValues { get; set; } = new Dictionary<string, string>();
 
-
         /// <summary>
-        /// Gets or sets the statistics.
+        ///     Gets or sets the statistics.
         /// </summary>
         /// <value>The statistics.</value>
         [Required]

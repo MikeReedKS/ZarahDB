@@ -91,7 +91,7 @@ namespace ZarahDB_Library
             {
                 timeoutSeconds = ZarahDBModel.GetTimeoutSeconds();
             }
-            return DataAccessLayer.ListTable(instance, (int)timeoutSeconds);
+            return DataAccessLayer.ListTable(instance, (int) timeoutSeconds);
         }
 
         #endregion
@@ -99,7 +99,7 @@ namespace ZarahDB_Library
         #region Backup
 
         /// <summary>
-        /// Backups this instance.
+        ///     Backups this instance.
         /// </summary>
         /// <returns>StatusValue</returns>
         public static StatusMessageValue Backup()
@@ -110,7 +110,7 @@ namespace ZarahDB_Library
         }
 
         /// <summary>
-        /// Backups the specified instance.
+        ///     Backups the specified instance.
         /// </summary>
         /// <param name="instance">The instance.</param>
         /// <returns>StatusValue</returns>
@@ -141,7 +141,7 @@ namespace ZarahDB_Library
                 timeoutSeconds = ZarahDBModel.GetTimeoutSeconds();
             }
 
-            return DataAccessLayer.Backup(instance, (int)timeoutSeconds);
+            return DataAccessLayer.Backup(instance, (int) timeoutSeconds);
         }
 
         /// <summary>
@@ -162,7 +162,7 @@ namespace ZarahDB_Library
                 timeoutSeconds = ZarahDBModel.GetTimeoutSeconds();
             }
 
-            return DataAccessLayer.Restore(instance, backup, (int)timeoutSeconds);
+            return DataAccessLayer.Restore(instance, backup, (int) timeoutSeconds);
         }
 
         #endregion
@@ -170,8 +170,8 @@ namespace ZarahDB_Library
         #region Csv
 
         /// <summary>
-        /// Inserts records from a folder of CSV files.
-        /// This method does not support transactions. The values are written directly to increase speed.
+        ///     Inserts records from a folder of CSV files.
+        ///     This method does not support transactions. The values are written directly to increase speed.
         /// </summary>
         /// <param name="csvFolder">The CSV folder.</param>
         /// <param name="columns">The columns.</param>
@@ -203,7 +203,8 @@ namespace ZarahDB_Library
                 //foreach (var csvFile in files)
                 Parallel.ForEach(files, csvFile =>
                 {
-                    result = DataAccessLayer.CsvFileInsert(new Uri(csvFile), columns, keyColumn, fieldSeparator, encloser,
+                    result = DataAccessLayer.CsvFileInsert(new Uri(csvFile), columns, keyColumn, fieldSeparator,
+                        encloser,
                         lineTerminator, commentLineStarter, instance, table);
                 }
                     );
@@ -217,7 +218,7 @@ namespace ZarahDB_Library
         }
 
         /// <summary>
-        /// Puts records from a folder of CSV files.
+        ///     Puts records from a folder of CSV files.
         /// </summary>
         /// <param name="csvFolder">The CSV folder.</param>
         /// <param name="columns">The columns.</param>
@@ -248,14 +249,15 @@ namespace ZarahDB_Library
             }
             catch (Exception ex)
             {
-                statusMessageValue = StatusHelper.SetStatusMessageValue(ex.HResult.ToString(), ex.Message, csvFolder.AbsolutePath);
+                statusMessageValue = StatusHelper.SetStatusMessageValue(ex.HResult.ToString(), ex.Message,
+                    csvFolder.AbsolutePath);
             }
 
             return statusMessageValue;
         }
 
         /// <summary>
-        /// Inserts records from CSV formatted data.
+        ///     Inserts records from CSV formatted data.
         /// </summary>
         /// <param name="csvData">The CSV data.</param>
         /// <param name="columns">The columns.</param>
@@ -293,7 +295,7 @@ namespace ZarahDB_Library
         }
 
         /// <summary>
-        /// Inserts records from a single CSV file.
+        ///     Inserts records from a single CSV file.
         /// </summary>
         /// <param name="csvFile">The CSV file.</param>
         /// <param name="columns">The columns.</param>
@@ -326,10 +328,11 @@ namespace ZarahDB_Library
 
             var result = DataAccessLayer.CsvFilePut(csvFile, columns, keyColumn, fieldSeparator, encloser,
                 lineTerminator,
-                commentLineStarter, instance, table, (int)timeoutSeconds);
+                commentLineStarter, instance, table, (int) timeoutSeconds);
 
             return result;
         }
+
         #endregion
 
         #region Delete
@@ -479,7 +482,11 @@ namespace ZarahDB_Library
         /// <param name="instance">The instance.</param>
         /// <param name="table">The table.</param>
         /// <param name="key">The key.</param>
-        /// <param name="checkExactMatch">Key collisions are possible. if set to <c>true</c> the file is checked to contain the exact key if there is any chance of collision. Set this to <c>false</c> for the fastest execution when key collisions are known not to exist.</param>
+        /// <param name="checkExactMatch">
+        ///     Key collisions are possible. if set to <c>true</c> the file is checked to contain the
+        ///     exact key if there is any chance of collision. Set this to <c>false</c> for the fastest execution when key
+        ///     collisions are known not to exist.
+        /// </param>
         /// <returns>System.Boolean</returns>
         public static bool Exists(Uri instance, string table, string key, bool? checkExactMatch = true)
         {
@@ -505,13 +512,18 @@ namespace ZarahDB_Library
                 return false;
             }
         }
+
         /// <summary>
         ///     Tests if the specified list of keys exist.
         /// </summary>
         /// <param name="instance">The instance.</param>
         /// <param name="table">The table.</param>
         /// <param name="keyList">The list of keys.</param>
-        /// <param name="checkExactMatch">Key collisions are possible. if set to <c>true</c> the file is checked to contain the exact key if there is any chance of collision. Set this to <c>false</c> for the fastest execution when key collisions are known not to exist.</param>
+        /// <param name="checkExactMatch">
+        ///     Key collisions are possible. if set to <c>true</c> the file is checked to contain the
+        ///     exact key if there is any chance of collision. Set this to <c>false</c> for the fastest execution when key
+        ///     collisions are known not to exist.
+        /// </param>
         /// <returns>Keys</returns>
         public static KeyList Exists(Uri instance, string table, KeyList keyList, bool? checkExactMatch = true)
         {
@@ -635,7 +647,7 @@ namespace ZarahDB_Library
         }
 
         /// <summary>
-        /// Gets the specified list of keys.
+        ///     Gets the specified list of keys.
         /// </summary>
         /// <param name="instance">The instance.</param>
         /// <param name="table">The table.</param>
@@ -660,7 +672,7 @@ namespace ZarahDB_Library
                 try
                 {
                     var statusKeyColumnValues = DataAccessLayer.Get(instance, table, key);
-                    var newKeyColumnValues = new KeyColumnValues { Key = key };
+                    var newKeyColumnValues = new KeyColumnValues {Key = key};
                     foreach (var columnValue in statusKeyColumnValues.ColumnValues)
                     {
                         var newColumnValue = new ColumnValue
@@ -738,6 +750,7 @@ namespace ZarahDB_Library
 
             return statusMessageValue;
         }
+
         public static StatusKeyColumnValue GetValue(Uri instance, string table, string key, string column)
         {
             StatusKeyColumnValue statusKeyColumnValue;
@@ -861,11 +874,9 @@ namespace ZarahDB_Library
             try
             {
                 DataAccessLayer.LockInstance(instance);
-                return;
             }
             catch (Exception)
             {
-                return;
             }
         }
 
@@ -879,11 +890,9 @@ namespace ZarahDB_Library
             try
             {
                 DataAccessLayer.UnlockInstance(instance);
-                return;
             }
             catch (Exception)
             {
-                return;
             }
         }
 
@@ -897,11 +906,9 @@ namespace ZarahDB_Library
             try
             {
                 DataAccessLayer.LockTable(instance, table);
-                return;
             }
             catch (Exception)
             {
-                return;
             }
         }
 
@@ -915,11 +922,9 @@ namespace ZarahDB_Library
             try
             {
                 DataAccessLayer.UnlockTable(instance, table);
-                return;
             }
             catch (Exception)
             {
-                return;
             }
         }
 
@@ -928,7 +933,7 @@ namespace ZarahDB_Library
         #region Put
 
         /// <summary>
-        /// Puts the specified key column values.
+        ///     Puts the specified key column values.
         /// </summary>
         /// <param name="keyColumnValues">The key column values.</param>
         /// <returns>StatusValue</returns>
@@ -939,7 +944,7 @@ namespace ZarahDB_Library
         }
 
         /// <summary>
-        /// Puts the specified key column values into a specific table using the default timeout.
+        ///     Puts the specified key column values into a specific table using the default timeout.
         /// </summary>
         /// <param name="table">The table.</param>
         /// <param name="keyColumnValues">The key column values.</param>
@@ -951,14 +956,15 @@ namespace ZarahDB_Library
         }
 
         /// <summary>
-        /// Puts the specified key column values into a specific table of the named instance.
+        ///     Puts the specified key column values into a specific table of the named instance.
         /// </summary>
         /// <param name="instance">The instance.</param>
         /// <param name="table">The table.</param>
         /// <param name="keyColumnValues">The key column values.</param>
         /// <param name="timeoutSeconds">The timeout seconds.</param>
         /// <returns>StatusValue</returns>
-        public static StatusMessageValue Put(Uri instance, string table, KeyColumnValues keyColumnValues, int? timeoutSeconds)
+        public static StatusMessageValue Put(Uri instance, string table, KeyColumnValues keyColumnValues,
+            int? timeoutSeconds)
         {
             if (instance == null)
             {
@@ -972,18 +978,19 @@ namespace ZarahDB_Library
             {
                 timeoutSeconds = ZarahDBModel.GetTimeoutSeconds();
             }
-            return DataAccessLayer.Put(instance, table, keyColumnValues, (int)timeoutSeconds);
+            return DataAccessLayer.Put(instance, table, keyColumnValues, (int) timeoutSeconds);
         }
 
         /// <summary>
-        /// Puts the specified key column values into a specific table of the named instance.
+        ///     Puts the specified key column values into a specific table of the named instance.
         /// </summary>
         /// <param name="instance">The instance.</param>
         /// <param name="table">The table.</param>
         /// <param name="keyColumnValueses">The key column values.</param>
         /// <param name="timeoutSeconds">The timeout seconds.</param>
         /// <returns>StatusValue</returns>
-        public static StatusMessageValue Put(Uri instance, string table, List<KeyColumnValues> keyColumnValueses, int? timeoutSeconds)
+        public static StatusMessageValue Put(Uri instance, string table, List<KeyColumnValues> keyColumnValueses,
+            int? timeoutSeconds)
         {
             if (instance == null)
             {
@@ -1000,7 +1007,7 @@ namespace ZarahDB_Library
             var result = new StatusMessageValue();
             foreach (var keyColumnValues in keyColumnValueses)
             {
-                result = DataAccessLayer.Put(instance, table, keyColumnValues, (int)timeoutSeconds);
+                result = DataAccessLayer.Put(instance, table, keyColumnValues, (int) timeoutSeconds);
             }
             return result;
         }
@@ -1122,7 +1129,7 @@ namespace ZarahDB_Library
             }
             return DataAccessLayer.Script(instance, script);
         }
-        
+
         public static bool PutScript(Uri instance, string scriptName, string script)
         {
             return DataAccessLayer.PutScript(instance, scriptName, script);
@@ -1133,7 +1140,8 @@ namespace ZarahDB_Library
             return DataAccessLayer.GetScript(instance, scriptName);
         }
 
-        public static StatusTransaction ExecuteScript(Uri instance, string scriptName, Dictionary<string, string> variables)
+        public static StatusTransaction ExecuteScript(Uri instance, string scriptName,
+            Dictionary<string, string> variables)
         {
             return DataAccessLayer.ExecuteScript(instance, scriptName, variables);
         }
@@ -1155,7 +1163,8 @@ namespace ZarahDB_Library
             ZarahDBModel.PutInstance(instance);
         }
 
-        public static void PutInstance(string instanceName = null, InstanceLocation rootFolder = InstanceLocation.Location)
+        public static void PutInstance(string instanceName = null,
+            InstanceLocation rootFolder = InstanceLocation.Location)
         {
             ZarahDBModel.PutInstance(instanceName, rootFolder);
         }

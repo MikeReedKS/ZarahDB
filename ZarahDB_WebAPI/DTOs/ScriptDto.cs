@@ -17,12 +17,12 @@ using System.ComponentModel.DataAnnotations;
 namespace ZarahDB_WebAPI
 {
     /// <summary>
-    /// Class ScriptDTO.
+    ///     Class ScriptDTO.
     /// </summary>
     public class ScriptDto
     {
         /// <summary>
-        /// Gets or sets the script.
+        ///     Gets or sets the script.
         /// </summary>
         /// <value>The script.</value>
         [Required]

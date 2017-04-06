@@ -3,34 +3,30 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ZarahDB_WebAPI.Controllers.Tests
 {
-    [TestClass()]
+    [TestClass]
     public class TableControllerTests
     {
-        [TestMethod()]
+        [TestMethod]
         public void CsvPutTest()
         {
-
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void CsvFilePutTest()
         {
-
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void CsvFolderPutTest()
         {
-
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void DeleteTableTest()
         {
-
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void ListTableTest()
         {
             Debug.WriteLine("Creating an instance of the Instance API controller.");
@@ -40,25 +36,21 @@ namespace ZarahDB_WebAPI.Controllers.Tests
             Debug.WriteLine($"Setting test instance to: {testInstanceName}.");
 
             var resultListTable = tableController.ListTable(testInstanceName);
-
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void ExistsTableTest()
         {
-
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void LockTableTest()
         {
-
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void UnlockTableTest()
         {
-
         }
     }
 }

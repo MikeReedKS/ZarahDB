@@ -18,18 +18,19 @@ using System.ComponentModel.DataAnnotations;
 namespace ZarahDB_Library.Types
 {
     /// <summary>
-    /// Class CommandWithResult.
+    ///     Class CommandWithResult.
     /// </summary>
     public class CommandWithResult
     {
         /// <summary>
-        /// Gets or sets the command.
+        ///     Gets or sets the command.
         /// </summary>
         /// <value>The command.</value>
         [Required]
         public string Command { get; set; }
+
         /// <summary>
-        /// Gets or sets the result.
+        ///     Gets or sets the result.
         /// </summary>
         /// <value>The result.</value>
         [Required]

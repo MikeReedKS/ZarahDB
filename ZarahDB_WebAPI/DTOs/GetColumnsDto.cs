@@ -18,33 +18,33 @@ using System.ComponentModel.DataAnnotations;
 namespace ZarahDB_WebAPI
 {
     /// <summary>
-    /// Class GetColumnsDto.
+    ///     Class GetColumnsDto.
     /// </summary>
     public class GetColumnsDto
     {
         /// <summary>
-        /// Gets or sets the instance.
+        ///     Gets or sets the instance.
         /// </summary>
         /// <value>The instance.</value>
         [Required]
         public string Instance { get; set; }
 
         /// <summary>
-        /// Gets or sets the table.
+        ///     Gets or sets the table.
         /// </summary>
         /// <value>The table.</value>
         [Required]
         public string Table { get; set; }
 
         /// <summary>
-        /// Gets or sets the key.
+        ///     Gets or sets the key.
         /// </summary>
         /// <value>The key.</value>
         [Required]
         public string Key { get; set; }
 
         /// <summary>
-        /// Gets or sets the list of columns.
+        ///     Gets or sets the list of columns.
         /// </summary>
         /// <value>The column.</value>
         [Required]

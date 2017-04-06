@@ -20,13 +20,13 @@ using System.Web.Http;
 namespace ZarahDB_WebAPI.Controllers
 {
     /// <summary>
-    /// Class ColumnController.
+    ///     Class ColumnController.
     /// </summary>
     /// <seealso cref="System.Web.Http.ApiController" />
     public class ColumnController : ApiController
     {
         /// <summary>
-        /// Deletes an index for the specified column.
+        ///     Deletes an index for the specified column.
         /// </summary>
         /// <param name="instance">The instance.</param>
         /// <param name="table">The table.</param>
@@ -65,9 +65,9 @@ namespace ZarahDB_WebAPI.Controllers
 
             return result;
         }
-        
+
         /// <summary>
-        /// Creates an index for the specified column.
+        ///     Creates an index for the specified column.
         /// </summary>
         /// <param name="instance">The instance.</param>
         /// <param name="table">The table.</param>

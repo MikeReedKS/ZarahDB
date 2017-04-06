@@ -25,7 +25,6 @@ namespace ZarahDB_Library.Tests
     [TestClass]
     public partial class ZarahDBTest
     {
-
         public StatusMessageValue Put(
             Uri instance,
             string table,
@@ -37,60 +36,50 @@ namespace ZarahDB_Library.Tests
             return ZarahDB.Put(instance, table, key, column, value);
         }
 
-
         public StatusList ListInstance(Uri instance, string table, string key)
         {
             return ZarahDB.ListInstance(null);
         }
-
 
         public StatusKeyColumnValues Get(Uri instance, string table, string key)
         {
             return ZarahDB.Get(instance, table, key);
         }
 
-
         public StatusMessageValue Get(Uri instance, string table, string key, string column)
         {
             return ZarahDB.Get(instance, table, key, column);
         }
-
 
         public StatusKeyColumnValues Get(Uri instance, string table, string key, List<string> columnList)
         {
             return ZarahDB.Get(instance, table, key, columnList);
         }
 
-
         public bool Exists(Uri instance)
         {
             return ZarahDB.Exists(instance);
         }
-
 
         public bool Exists(Uri instance, string table)
         {
             return ZarahDB.Exists(instance, table);
         }
 
-
         public bool Exists(Uri instance, string table, string key)
         {
             return ZarahDB.Exists(instance, table, key);
         }
-
 
         public StatusMessageValue Backup(Uri instance, int? timeoutSeconds)
         {
             return ZarahDB.Backup(instance, timeoutSeconds);
         }
 
-
         public StatusMessageValue DeleteInstance(Uri instance, int? timeoutSeconds)
         {
             return ZarahDB.DeleteInstance(instance, timeoutSeconds);
         }
-
 
         public StatusTransaction Transaction(Uri instance, string script)
         {

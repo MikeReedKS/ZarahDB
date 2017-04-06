@@ -18,31 +18,31 @@ using System.Collections.Generic;
 namespace ZarahDB_Library.Types
 {
     /// <summary>
-    /// Class StatusKeysColumnValues.
+    ///     Class StatusKeysColumnValues.
     /// </summary>
     public class StatusKeysColumnValues
     {
         /// <summary>
-        /// Gets or sets the status.
+        ///     Gets or sets the status.
         /// </summary>
         /// <value>The status.</value>
         public string Status { get; set; }
 
         /// <summary>
-        /// Gets or sets the message.
+        ///     Gets or sets the message.
         /// </summary>
         /// <value>The message.</value>
         public string Message { get; set; }
 
         /// <summary>
-        /// Gets or sets the column values.
+        ///     Gets or sets the column values.
         /// </summary>
         /// <value>A list of Keys, each with associated column values.</value>
         public List<KeyColumnValues> KeysColumnValues { get; set; } = new List<KeyColumnValues>();
 
         /// <summary>
-        /// Gets or sets the ticks.
-        /// Ticks are a high accuracy timestamp of when the object was created.
+        ///     Gets or sets the ticks.
+        ///     Ticks are a high accuracy timestamp of when the object was created.
         /// </summary>
         /// <value>The ticks.</value>
         public string Ticks { get; set; } = DateTime.Now.Ticks.ToString();

@@ -15,32 +15,32 @@
 namespace ZarahDB_Library.Enums
 {
     /// <summary>
-    /// Enum InstanceLocation
+    ///     Enum InstanceLocation
     /// </summary>
     public enum InstanceLocation
     {
         /// <summary>
-        /// The common application data
+        ///     The common application data
         /// </summary>
         CommonApplicationData = 0,
 
         /// <summary>
-        /// The application data
+        ///     The application data
         /// </summary>
         ApplicationData = 1,
 
         /// <summary>
-        /// The desktop directory
+        ///     The desktop directory
         /// </summary>
         DesktopDirectory = 2,
 
         /// <summary>
-        /// The location
+        ///     The location
         /// </summary>
         Location = 3,
 
         /// <summary>
-        /// The base directory
+        ///     The base directory
         /// </summary>
         BaseDirectory = 4,
         Codebase = 5

@@ -15,24 +15,27 @@
 namespace ZarahDB_Library.Enums
 {
     /// <summary>
-    /// Enum TransactionStatus
+    ///     Enum TransactionStatus
     /// </summary>
     public enum TransactionStatus
     {
         /// <summary>
-        /// The unknown
+        ///     The unknown
         /// </summary>
         Unknown,
+
         /// <summary>
-        /// The active
+        ///     The active
         /// </summary>
         Active,
+
         /// <summary>
-        /// The committed
+        ///     The committed
         /// </summary>
         Committed,
+
         /// <summary>
-        /// The rolled back
+        ///     The rolled back
         /// </summary>
         RolledBack
     }

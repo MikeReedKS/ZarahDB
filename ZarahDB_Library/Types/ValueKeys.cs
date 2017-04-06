@@ -17,17 +17,18 @@ using System.Collections.Generic;
 namespace ZarahDB_Library.Types
 {
     /// <summary>
-    /// Class ValueKeys.
+    ///     Class ValueKeys.
     /// </summary>
     public class ValueKeys
     {
         /// <summary>
-        /// Gets or sets the value.
+        ///     Gets or sets the value.
         /// </summary>
         /// <value>The value.</value>
         public string Value { get; set; }
+
         /// <summary>
-        /// Gets or sets the keys.
+        ///     Gets or sets the keys.
         /// </summary>
         /// <value>The keys.</value>
         public List<ForeignKeyReference> Keys { get; set; } = new List<ForeignKeyReference>();

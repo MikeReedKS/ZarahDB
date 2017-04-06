@@ -3,188 +3,224 @@
 namespace ZarahDB_Library.Enums
 {
     /// <summary>
-    /// Enum StatusCode
-    /// See http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
+    ///     Enum StatusCode
+    ///     See http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
     /// </summary>
     public enum StatusCode
     {
         //Informational 1xx
         /// <summary>
-        /// The continue
+        ///     The continue
         /// </summary>
         Continue = 100,
+
         /// <summary>
-        /// The switching protocols
+        ///     The switching protocols
         /// </summary>
         Switching_Protocols = 101,
         //Successful 2xx
         /// <summary>
-        /// The ok
+        ///     The ok
         /// </summary>
         OK = 200,
+
         /// <summary>
-        /// The created
+        ///     The created
         /// </summary>
         Created = 201,
+
         /// <summary>
-        /// The accepted
+        ///     The accepted
         /// </summary>
         Accepted = 202,
+
         /// <summary>
-        /// The non authoritative information
+        ///     The non authoritative information
         /// </summary>
         Non_Authoritative_Information = 203,
+
         /// <summary>
-        /// The no content
+        ///     The no content
         /// </summary>
         No_Content = 204,
+
         /// <summary>
-        /// The reset content
+        ///     The reset content
         /// </summary>
         Reset_Content = 205,
+
         /// <summary>
-        /// The partial content
+        ///     The partial content
         /// </summary>
         Partial_Content = 206,
         //Redirection 3xx
         /// <summary>
-        /// The multiple choices
+        ///     The multiple choices
         /// </summary>
         Multiple_Choices = 300,
+
         /// <summary>
-        /// The moved permanently
+        ///     The moved permanently
         /// </summary>
         Moved_Permanently = 301,
+
         /// <summary>
-        /// The found
+        ///     The found
         /// </summary>
         Found = 302,
+
         /// <summary>
-        /// The see other
+        ///     The see other
         /// </summary>
         See_Other = 303,
+
         /// <summary>
-        /// The not modified
+        ///     The not modified
         /// </summary>
         Not_Modified = 304,
+
         /// <summary>
-        /// The use proxy
+        ///     The use proxy
         /// </summary>
         Use_Proxy = 305,
+
         /// <summary>
-        /// The temporary redirect
+        ///     The temporary redirect
         /// </summary>
         Temporary_Redirect = 307,
         //Client Error 4xx
         /// <summary>
-        /// The bad request
+        ///     The bad request
         /// </summary>
         Bad_Request = 400,
+
         /// <summary>
-        /// The unauthorized
+        ///     The unauthorized
         /// </summary>
         Unauthorized = 401,
+
         /// <summary>
-        /// The payment required
+        ///     The payment required
         /// </summary>
         Payment_Required = 402,
+
         /// <summary>
-        /// The forbidden
+        ///     The forbidden
         /// </summary>
         Forbidden = 403,
+
         /// <summary>
-        /// The not found
+        ///     The not found
         /// </summary>
         Not_Found = 404,
+
         /// <summary>
-        /// The method not allowed
+        ///     The method not allowed
         /// </summary>
         Method_Not_Allowed = 405,
+
         /// <summary>
-        /// The not acceptable
+        ///     The not acceptable
         /// </summary>
         Not_Acceptable = 406,
+
         /// <summary>
-        /// The proxy authentication required
+        ///     The proxy authentication required
         /// </summary>
         Proxy_Authentication_Required = 407,
+
         /// <summary>
-        /// The request timeout
+        ///     The request timeout
         /// </summary>
         Request_Timeout = 408,
+
         /// <summary>
-        /// The conflict
+        ///     The conflict
         /// </summary>
         Conflict = 409,
+
         /// <summary>
-        /// The gone
+        ///     The gone
         /// </summary>
         Gone = 410,
+
         /// <summary>
-        /// The length required
+        ///     The length required
         /// </summary>
         Length_Required = 411,
+
         /// <summary>
-        /// The precondition failed
+        ///     The precondition failed
         /// </summary>
         Precondition_Failed = 412,
+
         /// <summary>
-        /// The request entity too large
+        ///     The request entity too large
         /// </summary>
         Request_Entity_Too_Large = 413,
+
         /// <summary>
-        /// The request URI too long
+        ///     The request URI too long
         /// </summary>
         Request_URI_Too_Long = 414,
+
         /// <summary>
-        /// The unsupported media type
+        ///     The unsupported media type
         /// </summary>
         Unsupported_Media_Type = 415,
+
         /// <summary>
-        /// The requested range not satisfiable
+        ///     The requested range not satisfiable
         /// </summary>
         Requested_Range_Not_Satisfiable = 416,
+
         /// <summary>
-        /// The expectation failed
+        ///     The expectation failed
         /// </summary>
         Expectation_Failed = 417,
         //Server Error 5xx
         /// <summary>
-        /// The internal server error
+        ///     The internal server error
         /// </summary>
         Internal_Server_Error = 500,
+
         /// <summary>
-        /// The not implemented
+        ///     The not implemented
         /// </summary>
         Not_Implemented = 501,
+
         /// <summary>
-        /// The bad gateway
+        ///     The bad gateway
         /// </summary>
         Bad_Gateway = 502,
+
         /// <summary>
-        /// The service unavailable
+        ///     The service unavailable
         /// </summary>
         Service_Unavailable = 503,
+
         /// <summary>
-        /// The gateway timeout
+        ///     The gateway timeout
         /// </summary>
         Gateway_Timeout = 504,
+
         /// <summary>
-        /// The HTTP version not supported
+        ///     The HTTP version not supported
         /// </summary>
         HTTP_Version_Not_Supported = 505,
+
         /// <summary>
-        /// The exception
+        ///     The exception
         /// </summary>
         Exception = 520,
         //Transaction 7xx
         /// <summary>
-        /// The rolled back
+        ///     The rolled back
         /// </summary>
         Rolled_Back = 770,
         //Locks 8xx
         /// <summary>
-        /// The outside lock
+        ///     The outside lock
         /// </summary>
         Outside_Lock = 850
     }

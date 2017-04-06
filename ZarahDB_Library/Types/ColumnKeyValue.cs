@@ -15,22 +15,24 @@
 namespace ZarahDB_Library.Types
 {
     /// <summary>
-    /// Class ColumnKeyValue.
+    ///     Class ColumnKeyValue.
     /// </summary>
     public class ColumnKeyValue
     {
         /// <summary>
-        /// Gets or sets the column.
+        ///     Gets or sets the column.
         /// </summary>
         /// <value>The column.</value>
         public string Column { get; set; }
+
         /// <summary>
-        /// Gets or sets the key.
+        ///     Gets or sets the key.
         /// </summary>
         /// <value>The key.</value>
         public string Key { get; set; }
+
         /// <summary>
-        /// Gets or sets the value.
+        ///     Gets or sets the value.
         /// </summary>
         /// <value>The value.</value>
         public string Value { get; set; }
