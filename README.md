@@ -25,6 +25,10 @@ The second is to use the WebAPI/Swagger based interface for an SOA architecture.
 4. Push to the branch: `git push origin my-new-feature`
 5. Submit a pull request :D
 
+## Using Visual Studio
+
+[Click HERE to learn how to contribute using Visual Studio](http://www.zarahdb.com/GitHub/GitHub_Introduction.pdf)
+
 ## History
 
 Starting in the late '80s I worked on a series of projects and used a Scattered Database to add performance to several of the systems I designed. I got a lot of pushback once SQL Server was released, but there were times when the Scattered Database could easily outperform SQL Server. With the growth in popularity of NoSQL databases, I decided it was time to set the scattered database free. I hope you like it!
