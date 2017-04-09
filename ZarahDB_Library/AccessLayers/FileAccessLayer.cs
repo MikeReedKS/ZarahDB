@@ -604,22 +604,28 @@ namespace ZarahDB_Library.AccessLayers
         /// <param name="instance">The instance.</param>
         /// <param name="table">The table.</param>
         /// <returns>System.Boolean</returns>
-        internal static bool DeleteTable(Uri instance, string table)
+        internal static StatusMessageValue DeleteTable(Uri instance, string table)
         {
-            var index = CreateKeyIndex(instance, null, null);
+            StatusMessageValue statusMessageValue;
             try
             {
+                var index = CreateKeyIndex(instance, null, null);
                 var dir = new DirectoryInfo(index);
                 foreach (var folder in dir.EnumerateDirectories(table, SearchOption.TopDirectoryOnly))
                 {
-                    Directory.Delete(folder.FullName, true);
+                    if (table.Equals(folder.Name, StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        Directory.Delete(folder.FullName, true);
+                    }
                 }
-                return true;
+                //Return success and the path to the backup file
+                statusMessageValue = StatusHelper.SetStatusMessageValue(StatusCode.OK, dir.Name);
             }
-            catch
+            catch (Exception ex)
             {
-                return false;
+                statusMessageValue = StatusHelper.SetStatusMessageValue(StatusCode.Exception, ex.Message);
             }
+            return statusMessageValue;
         }
 
         #endregion

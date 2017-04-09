@@ -91,29 +91,83 @@ namespace ZarahDB_WebAPI.Controllers
         }
 
         /// <summary>
-        ///     Import a single CSV file directly.
+        ///     Sets the default maximum folder depth for the instance.
         /// </summary>
-        /// <param name="csvFile">The CSV file.</param>
-        /// <param name="columns">The columns.</param>
-        /// <param name="keyColumn">The key column.</param>
-        /// <param name="fieldSeparator">The field separator.</param>
-        /// <param name="encloser">The encloser.</param>
-        /// <param name="lineTerminator">The line terminator.</param>
-        /// <param name="commentLineStarter">The comment line starter.</param>
         /// <param name="instance">The instance.</param>
         /// <param name="table">The table.</param>
-        /// <param name="timeoutSeconds">The timeout seconds.</param>
-        /// <returns>StatusTransaction</returns>
+        /// <param name="maxDepth">The maximum depth.</param>
+        /// <returns>StatusMessageValue</returns>
+        /// <response code="200">OK</response>
+        /// <response code="401">Authorization has been denied for this request.</response>
+        /// <response code="403">
+        ///     Forbidden. Instance disallowed by configuration. (HTTP Response Code is 200, Response Body Status
+        ///     is 403)
+        /// </response>
+        /// <response code="520">Exception. The message will contain the exception message.</response>
         /// <remarks>
-        ///     Import a single CSV file.
-        ///     The import bypasses the transaction system to allow the fastest possible addition of new data, but may result in
-        ///     concurrency challenges.
-        ///     It is advised that the instance be locked prior to issuing this request if there is a chance that other clients may
-        ///     perform
-        ///     other operations during the import. Any existing key/column/values may be overwritten with the CSV data. Existing
-        ///     data that
-        ///     is not overwritten with new data is untouched.
+        ///     Sets the default maximum folder depth for the instance. As row files are scattered, they will never scatter
+        ///     further than the number of sub-folders given from the top of the table. By default, the  maximum folder depth for
+        ///     the instance is 5.
+        ///     Once any data is written to a table, the maximum folder depth for the table is set, based on the default for the
+        ///     instance. Changing
+        ///     the instance default only affects new tables, before any data is written to them. It does not affect tables which
+        ///     have ever contained data
+        ///     or where the maximum folder depth for the table has ever been set.
         /// </remarks>
+        [AcceptVerbs("POST")]
+        [Route("Instance/MaxDepth")]
+        public StatusMessageValue MaxDepth(
+            [FromUri] string instance,
+            [FromUri] string table,
+            [FromUri] int maxDepth = 5)
+        {
+            var statusMessageValue = new StatusMessageValue();
+
+            //Check security to be sure this method is allowed to execute
+            if (!SecurityHelper.MethodAllowed(MethodBase.GetCurrentMethod().Name, ref statusMessageValue))
+                return statusMessageValue;
+            if (!SecurityHelper.InstanceAllowed(instance, ref statusMessageValue)) return statusMessageValue;
+
+            //Update instance to physical path based on InstancesRootFolder
+            instance = WebHelper.GetInstancePath(instance);
+
+            //Call the method
+            try
+            {
+                statusMessageValue = ZarahDB.SetMaxDepth(new Uri(instance), table, maxDepth);
+            }
+            catch (Exception ex)
+            {
+                statusMessageValue = StatusHelper.SetStatusMessageValue(ex.HResult.ToString(), ex.Message, "");
+            }
+
+            return statusMessageValue;
+        }
+        
+        /// <summary>
+                 ///     Import a single CSV file directly.
+                 /// </summary>
+                 /// <param name="csvFile">The CSV file.</param>
+                 /// <param name="columns">The columns.</param>
+                 /// <param name="keyColumn">The key column.</param>
+                 /// <param name="fieldSeparator">The field separator.</param>
+                 /// <param name="encloser">The encloser.</param>
+                 /// <param name="lineTerminator">The line terminator.</param>
+                 /// <param name="commentLineStarter">The comment line starter.</param>
+                 /// <param name="instance">The instance.</param>
+                 /// <param name="table">The table.</param>
+                 /// <param name="timeoutSeconds">The timeout seconds.</param>
+                 /// <returns>StatusTransaction</returns>
+                 /// <remarks>
+                 ///     Import a single CSV file.
+                 ///     The import bypasses the transaction system to allow the fastest possible addition of new data, but may result in
+                 ///     concurrency challenges.
+                 ///     It is advised that the instance be locked prior to issuing this request if there is a chance that other clients may
+                 ///     perform
+                 ///     other operations during the import. Any existing key/column/values may be overwritten with the CSV data. Existing
+                 ///     data that
+                 ///     is not overwritten with new data is untouched.
+                 /// </remarks>
         [AcceptVerbs("PUT")]
         [Route("Table/CSV/File")]
         public StatusMessageValue CsvFilePut(
@@ -233,7 +287,7 @@ namespace ZarahDB_WebAPI.Controllers
         }
 
         /// <summary>
-        ///     Deletes the specified table.
+        /// Deletes the specified table.
         /// </summary>
         /// <param name="instance">The instance.</param>
         /// <param name="table">The table.</param>
@@ -241,33 +295,36 @@ namespace ZarahDB_WebAPI.Controllers
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise</returns>
         [AcceptVerbs("DELETE")]
         [Route("Table")]
-        public bool DeleteTable(
+        public StatusMessageValue DeleteTable(
             [FromUri] string instance,
             [FromUri] string table,
             [FromUri] int? timeoutSeconds = null)
         {
-            //TODO: Migrate to SecurityHelper
+            var statusMessageValue = new StatusMessageValue();
+
+            //Check security to be sure this method is allowed to execute
+            if (!SecurityHelper.MethodAllowed(MethodBase.GetCurrentMethod().Name, ref statusMessageValue)) return statusMessageValue;
+            if (!SecurityHelper.InstanceAllowed(instance, ref statusMessageValue)) return statusMessageValue;
+
             if (instance.Equals("null", StringComparison.OrdinalIgnoreCase))
             {
                 instance = null;
             }
-            string localPath = null;
-            if (instance != null)
-            {
-                localPath = Path.Combine(HttpRuntime.AppDomainAppPath, instance);
-            }
 
-            bool result;
+            //Update instance to physical path based on InstancesRootFolder
+            var localPath = WebHelper.GetInstancePath(instance);
+
             try
             {
-                result = ZarahDB.DeleteTable(localPath == null ? null : new Uri(localPath), table, timeoutSeconds);
+                statusMessageValue = ZarahDB.DeleteTable(localPath == null ? null : new Uri(localPath), table, timeoutSeconds);
             }
-            catch
+            catch (Exception ex)
             {
-                return false;
+                statusMessageValue = StatusHelper.SetStatusMessageValue(ex.HResult.ToString(), ex.Message, "");
+
             }
 
-            return result;
+            return statusMessageValue;
         }
 
         /// <summary>

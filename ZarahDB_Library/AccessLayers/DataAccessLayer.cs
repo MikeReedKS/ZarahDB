@@ -326,22 +326,39 @@ namespace ZarahDB_Library.AccessLayers
         /// <param name="table">The table.</param>
         /// <param name="timeoutSeconds">The timeout seconds.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise</returns>
-        internal static bool DeleteTable(Uri instance, string table, int timeoutSeconds)
+        internal static StatusMessageValue DeleteTable(Uri instance, string table, int timeoutSeconds)
         {
+            var requestedTicks = StringHelper.NowTicks();
+
             var startTime = DateTime.Now;
             var endTime = startTime.AddSeconds(timeoutSeconds);
             while (FileAccessLayer.InstanceLocked(instance))
             {
                 if (DateTime.Now > endTime)
                 {
-                    return false;
+                    var statusValue = new StatusMessageValue
+                    {
+                        Status = "597",
+                        Message = $"Network timeout error (Persistant Lock for more than {timeoutSeconds} seconds.)",
+                        Value = "",
+                        Statistics = StatusHelper.FinalizeStats(requestedTicks, "")
+                    };
+                    return statusValue;
                 }
                 Thread.Sleep(100);
             }
+
+            var startTicks = StringHelper.NowTicks();
+
             FileAccessLayer.LockInstance(instance);
             var result = FileAccessLayer.DeleteTable(instance, table);
             FileAccessLayer.UnlockInstance(instance);
+
+            result.Statistics = StatusHelper.FinalizeStats(requestedTicks, startTicks);
+
             return result;
+
+
         }
 
         #endregion
