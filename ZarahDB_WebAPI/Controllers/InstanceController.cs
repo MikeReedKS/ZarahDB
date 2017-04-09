@@ -253,7 +253,6 @@ namespace ZarahDB_WebAPI.Controllers
         ///     Sets the default maximum folder depth for the instance.
         /// </summary>
         /// <param name="instance">The instance.</param>
-        /// <param name="table">The table.</param>
         /// <param name="maxDepth">The maximum depth.</param>
         /// <returns>StatusMessageValue</returns>
         /// <response code="200">OK</response>
@@ -275,9 +274,8 @@ namespace ZarahDB_WebAPI.Controllers
         /// </remarks>
         [AcceptVerbs("POST")]
         [Route("Instance/MaxDepth")]
-        public StatusMessageValue MaxDepthInstance(
+        public StatusMessageValue MaxDepth(
             [FromUri] string instance,
-            [FromUri] string table = "",
             [FromUri] int maxDepth = 5)
         {
             var statusMessageValue = new StatusMessageValue();
@@ -293,7 +291,7 @@ namespace ZarahDB_WebAPI.Controllers
             //Call the method
             try
             {
-                statusMessageValue = ZarahDB.SetMaxDepth(new Uri(instance), table, maxDepth);
+                statusMessageValue = ZarahDB.SetMaxDepth(new Uri(instance), "", maxDepth);
             }
             catch (Exception ex)
             {

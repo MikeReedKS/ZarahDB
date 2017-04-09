@@ -71,8 +71,8 @@ namespace ZarahDB_WebAPI.Controllers.Tests
             Assert.AreEqual(resultGetInstanceLock.Status, "200", "Failed to GetInstanceLock.");
             Assert.AreEqual(resultGetInstanceLock.Value, "True", "Failed to LockInstance.");
 
-            var resultMaxDepthInstance = instanceController.MaxDepthInstance(testInstanceName, "", 7);
-            Assert.AreEqual(resultMaxDepthInstance.Status, "200", "Failed to MaxDepthInstance.");
+            var resultMaxDepthInstance = instanceController.MaxDepth(testInstanceName, 7);
+            Assert.AreEqual(resultMaxDepthInstance.Status, "200", "Failed to MaxDepth.");
 
             var resultUnlockInstance = instanceController.UnlockInstance(testInstanceName);
             Assert.AreEqual(resultUnlockInstance.Status, "200", "Failed to UnlockInstance.");

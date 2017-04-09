@@ -405,7 +405,7 @@ namespace ZarahDB_Library
         /// <param name="table">The table.</param>
         /// <param name="timeoutSeconds">The timeout seconds.</param>
         /// <returns>System.Boolean</returns>
-        public static bool DeleteTable(Uri instance, string table, int? timeoutSeconds)
+        public static StatusMessageValue DeleteTable(Uri instance, string table, int? timeoutSeconds)
         {
             if (instance == null)
             {

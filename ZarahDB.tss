@@ -2,13 +2,16 @@
 <ArrayOfArrayOfArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ArrayOfArrayOfString>
     <ArrayOfString>
-      <string>D:\GitHub\ZarahDB\ZarahDB_Library\AccessLayers\DataAccessLayer.cs</string>
+      <string>d:\github\zarahdb\zarahdb_library\accesslayers\dataaccesslayer.cs</string>
     </ArrayOfString>
     <ArrayOfString>
-      <string>D:\GitHub\ZarahDB\ZarahDB_WebAPI\Web.config</string>
+      <string>History - develop</string>
     </ArrayOfString>
     <ArrayOfString>
-      <string>D:\GitHub\ZarahDB\ZarahDB_Library\ZarahDB.cs</string>
+      <string>d:\github\zarahdb\zarahdb_webapi\web.config</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>d:\github\zarahdb\zarahdb_library\zarahdb.cs</string>
     </ArrayOfString>
     <ArrayOfString>
       <string>ZarahDB_Library</string>

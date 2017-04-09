@@ -57,11 +57,11 @@ namespace ZarahDB_WebAPI.Controllers
                 localPath = Path.Combine(HttpRuntime.AppDomainAppPath, instance);
             }
 
-            bool result;
+            bool result = true;
             try
             {
                 //TODO: Add a delete keys method
-                result = ZarahDB.DeleteTable(localPath == null ? null : new Uri(localPath), table, timeoutSeconds);
+                //result = ZarahDB.DeleteTable(localPath == null ? null : new Uri(localPath), table, timeoutSeconds);
             }
             catch
             {
@@ -187,7 +187,7 @@ namespace ZarahDB_WebAPI.Controllers
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise</returns>
         [AcceptVerbs("DELETE")]
         [Route("Key")]
-        public bool DeleteKey(
+        public StatusMessageValue DeleteKey(
             [FromUri] string instance,
             [FromUri] string table,
             [FromUri] string key,
@@ -204,18 +204,19 @@ namespace ZarahDB_WebAPI.Controllers
                 localPath = Path.Combine(HttpRuntime.AppDomainAppPath, instance);
             }
 
-            bool result;
+            StatusMessageValue statusMessageValue;
             try
             {
                 //TODO: Add a delete key method
-                result = ZarahDB.DeleteTable(localPath == null ? null : new Uri(localPath), table, timeoutSeconds);
+                statusMessageValue = ZarahDB.DeleteTable(localPath == null ? null : new Uri(localPath), table, timeoutSeconds);
             }
-            catch
+            catch (Exception ex)
             {
-                return false;
+                statusMessageValue = StatusHelper.SetStatusMessageValue(ZarahDB_Library.Enums.StatusCode.Internal_Server_Error,
+                        ex.Message);
             }
 
-            return result;
+            return statusMessageValue;
         }
 
         /// <summary>
