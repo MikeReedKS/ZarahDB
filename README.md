@@ -195,7 +195,7 @@ namespace ConsoleApplication1
             var getResult = ZarahDB.Get(instance, table, key, column);
             
             //Place the value in a complex object
-            var complexObject2 = JsonConvert.DeserializeObject<ComplexObject>(getResult.value);
+            var complexObject2 = JsonConvert.DeserializeObject<ComplexObject>(getResult.Value);
         }
     }
 }
